@@ -1,20 +1,59 @@
-.squares-container {
-  text-align: center;
-  margin-top: 2rem;
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.color-value {
+  font-family: monospace;
 }
 
 .squares-grid {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 16px;
-  justify-content: center;
-  margin-top: 1rem;
+  grid-template-columns: repeat(3, 0.5fr);
+  gap: 1rem;
+  width: 100%;
 }
 
-.square {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
+.color-square {
+  aspect-ratio: 1/1;
+  border: none;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-square:hover {
+  transform: scale(1.05);
+}
+
+.message {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.text-success {
+  color: #0e592d;
+}
+
+.text-error {
+  color: #6c1208;
+}
+
+.reset-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.reset-button:hover {
+  background-color: #1976d2;
 }

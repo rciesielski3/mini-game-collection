@@ -7,6 +7,8 @@ import TicTacToe from "../games/TicTacToe/TicTacToe";
 import WhackAMole from "../games/WhackAMole/WhackAMole";
 import ReactionTimeGame from "../games/ReactionTime/ReactionTimeGame";
 import RacingGame from "../games/Racing/RacingGame";
+import SquaresGame from "../games/Squares/SquaresGame";
+import MemoryGame from "../games/Memory/MemoryGame";
 
 type Props = {
   gameName: string | null;
@@ -30,6 +32,10 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <ReactionTimeGame />;
       case "RacingGame":
         return <RacingGame />;
+      case "SquaresGame":
+        return <SquaresGame />;
+      case "MemoryGame":
+        return <MemoryGame />;
       default:
         return null;
     }

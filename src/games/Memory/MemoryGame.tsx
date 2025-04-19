@@ -8,7 +8,7 @@ const shuffle = (array: string[]) => {
   return [...array, ...array].sort(() => Math.random() - 0.5);
 };
 
-export const MemoryGame = () => {
+const MemoryGame = () => {
   const [cards, setCards] = React.useState<string[]>([]);
   const [flipped, setFlipped] = React.useState<number[]>([]);
   const [matched, setMatched] = React.useState<number[]>([]);
@@ -56,3 +56,5 @@ export const MemoryGame = () => {
     </div>
   );
 };
+
+export default MemoryGame;
