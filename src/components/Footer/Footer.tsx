@@ -6,16 +6,12 @@ const Footer = () => {
   return (
     <footer className="app-footer">
       <p>
-        by{" "}
-        <a
-          href="https://github.com/rciesielski3"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        Built with 💡 by{" "}
+        <a href="https://github.com/rciesielski3" className="underline">
           Rafal Ciesielski
         </a>
       </p>
-      <p>© 2025 All rights reserved.</p>
+      <p>© {new Date().getFullYear()} All rights reserved.</p>
     </footer>
   );
 };

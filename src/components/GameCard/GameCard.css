@@ -1,6 +1,6 @@
 .game-card {
-  background: #4693a1cc;
-  border: 2px solid #ddd;
+  background: radial-gradient(circle, #b7c4ca 0%, #5c6471 100%);
+  border: 2px solid #434e74;
   border-radius: 12px;
   padding: 1rem;
   text-align: center;

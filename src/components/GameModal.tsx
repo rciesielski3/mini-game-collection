@@ -48,7 +48,7 @@ const GameModal = ({ gameName, onClose }: Props) => {
     >
       <div
         style={{
-          background: "rgb(127, 166, 169)",
+          background: "radial-gradient(circle, #b7c4ca 0%, #5c6471 100%)",
           padding: "2rem",
           borderRadius: "10px",
           position: "relative",
