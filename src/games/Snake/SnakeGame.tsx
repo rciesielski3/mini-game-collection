@@ -135,7 +135,9 @@ const SnakeGame = () => {
       {isGameOver && (
         <div className="snake-over">
           <p>Game Over!</p>
-          <button onClick={restart}>Restart</button>
+          <button className="restart-button" onClick={restart}>
+            Restart
+          </button>
         </div>
       )}
     </div>

@@ -44,16 +44,16 @@
 }
 
 .racing-over button {
-  padding: 0.4rem 0.8rem;
-  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #2196f3;
+  margin-top: 1rem;
+  background-color: #9d0202;
   color: white;
   border: none;
   border-radius: 5px;
 }
 
 .racing-over button:hover {
-  background-color: #1976d2;
+  background-color: #7d0303;
 }

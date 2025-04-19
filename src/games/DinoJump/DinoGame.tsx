@@ -127,7 +127,9 @@ const DinoGame = () => {
       {gameOver ? (
         <div className="game-over">
           <p>Game Over!</p>
-          <button onClick={restart}>Restart</button>
+          <button className="restart-button" onClick={restart}>
+            Restart
+          </button>
         </div>
       ) : (
         <p className="instruction">

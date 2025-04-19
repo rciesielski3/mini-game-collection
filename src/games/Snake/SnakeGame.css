@@ -36,3 +36,18 @@
 .snake-over {
   color: red;
 }
+
+.restart-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: #9d0202;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.restart-button:hover {
+  background-color: #7d0303;
+}

@@ -44,3 +44,18 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+.ttt-restart {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: #9d0202;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.ttt-restart:hover {
+  background-color: #7d0303;
+}
