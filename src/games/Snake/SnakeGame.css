@@ -1,0 +1,38 @@
+.snake-wrapper {
+  text-align: center;
+  outline: none;
+}
+
+.snake-title {
+  margin-bottom: 1rem;
+}
+
+.snake-board {
+  display: grid;
+  gap: 2px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.cell.snake {
+  background-color: green;
+}
+
+.cell.food {
+  background-color: red;
+  border-radius: 50%;
+}
+
+.cell.empty {
+  background-color: #eee;
+}
+
+.snake-over {
+  color: red;
+}

@@ -1,26 +1,89 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import GameModal from "./components/GameModal";
+import GameCard from "./components/GameCard/GameCard";
+import Footer from "./components/Footer/Footer";
 
-function App() {
+const GAMES = [
+  {
+    emoji: "🐍",
+    title: "Snake",
+    description: "Classic snake game with a twist.",
+    component: "Snake",
+  },
+  {
+    emoji: "🦖",
+    title: "Dino Jump",
+    description: "Jump over obstacles in this fast-paced game.",
+    component: "DinoJump",
+  },
+  {
+    emoji: "❌ 🔵",
+    title: "Tic-Tac-Toe",
+    description: "The timeless 2-player strategy game.",
+    component: "TicTacToe",
+  },
+  {
+    emoji: "🔨",
+    title: "Whack a Mole",
+    description: "Tap moles as they appear before time runs out.",
+    component: "WhackAMole",
+  },
+  {
+    emoji: "⚡",
+    title: "Reaction Time",
+    description: "Test how fast your reflexes are!",
+    component: "ReactionTimeGame",
+  },
+  {
+    emoji: "🏎️",
+    title: "Racing Game",
+    description: "Dodge the obstacles and race for high score!",
+    component: "RacingGame",
+  },
+  {
+    emoji: "🎨",
+    title: "Color Match",
+    description: "Match the color block with the target color.",
+    component: "SquaresGame",
+  },
+  {
+    emoji: "🧠",
+    title: "Memory Game",
+    description: "Flip and match all cards as fast as you can!",
+    component: "MemoryGame",
+  },
+];
+
+const App = () => {
+  const [selectedGame, setSelectedGame] = useState<string | null>(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-wrapper">
+      <h1 className="app-title">Mini Game Collection</h1>
+      <p className="app-description">
+        Explore fun mini games to relax or challenge your brain 🧠
+      </p>
+
+      <div className="game-grid">
+        {GAMES.map((game) => (
+          <GameCard
+            key={game.title}
+            emoji={game.emoji}
+            title={game.title}
+            description={game.description}
+            onClick={() => setSelectedGame(game.component)}
+          />
+        ))}
+      </div>
+
+      <GameModal
+        gameName={selectedGame}
+        onClose={() => setSelectedGame(null)}
+      />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;

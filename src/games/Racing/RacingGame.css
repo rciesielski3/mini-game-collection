@@ -1,0 +1,59 @@
+.racing-container {
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 1rem;
+}
+
+.racing-score {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.racing-game {
+  position: relative;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  border: 2px solid #ccc;
+  overflow: hidden;
+}
+
+.racing-car {
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  background-color: blue;
+  transition: left 0.2s;
+  border-radius: 4px;
+}
+
+.racing-obstacle {
+  position: absolute;
+  background-color: red;
+  border-radius: 2px;
+}
+
+.racing-controls {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.racing-over {
+  margin-top: 1rem;
+  color: red;
+  font-weight: bold;
+}
+
+.racing-over button {
+  padding: 0.4rem 0.8rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.racing-over button:hover {
+  background-color: #1976d2;
+}

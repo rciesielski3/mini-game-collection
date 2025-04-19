@@ -1,0 +1,17 @@
+.app-footer {
+  text-align: center;
+  background-color: #a3a3a5;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.app-footer a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+.squares-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.squares-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 16px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,43 @@
+.reaction-wrapper {
+  width: 100%;
+  height: 200px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  transition: background-color 0.3s;
+  border-radius: 8px;
+  cursor: pointer;
+  max-width: 400px;
+}
+
+.reaction-wrapper.idle {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.reaction-wrapper.waiting {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.reaction-wrapper.green {
+  background-color: #4caf50;
+  color: white;
+}
+
+.reaction-start {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.reaction-start:hover {
+  background-color: #1976d2;
+}

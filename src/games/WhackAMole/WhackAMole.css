@@ -1,0 +1,51 @@
+.wam-container {
+  text-align: center;
+  font-family: sans-serif;
+  padding: 1rem;
+}
+
+.wam-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.wam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.wam-hole {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border-radius: 50%;
+  border: 2px solid #999;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wam-hole.active {
+  background-color: #4caf50;
+  box-shadow: 0 0 10px #4caf50;
+}
+
+.wam-start {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.wam-start:hover {
+  background-color: #1976d2;
+}
