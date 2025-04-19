@@ -60,10 +60,12 @@ const App = () => {
 
   return (
     <div className="app-wrapper">
-      <h1 className="app-title">Mini Game Collection</h1>
-      <p className="app-description">
-        Explore fun mini games to relax or challenge your brain 🧠
-      </p>
+      <header className="app-header">
+        <h1 className="app-title">Mini Game Collection</h1>
+        <p className="app-description">
+          Explore fun mini games to relax or challenge your brain 🧠
+        </p>
+      </header>
 
       <div className="game-grid">
         {GAMES.map((game) => (
