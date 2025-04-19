@@ -1,10 +1,8 @@
 .app-footer {
   text-align: center;
-  /* background-color: #a3a3a5; */
   background: radial-gradient(circle, #b7c4ca 0%, #374458 100%);
-  border-top: 1px solid #ddd;
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.8rem;
+  color: #363434;
 }
 
 .app-footer a {

@@ -1,10 +1,9 @@
 import React from "react";
-
 import "./TicTacToe.css";
 
 const emptyBoard = Array(9).fill(null);
 
-const TicTacToe = () => {
+const TicTacToe: React.FC = () => {
   const [board, setBoard] = React.useState<(string | null)[]>(emptyBoard);
   const [xIsNext, setXIsNext] = React.useState(true);
 
@@ -26,8 +25,9 @@ const TicTacToe = () => {
   };
 
   return (
-    <div className="ttt-container">
-      <h2>Tic-Tac-Toe</h2>
+    <div className="game-container">
+      <h2 className="game-title">❌ 🔵 Tic-Tac-Toe</h2>
+      <p className="instruction">Try to get 3 in a row to win!</p>
       <div className="ttt-board">
         {board.map((cell, i) => (
           <div
@@ -41,14 +41,14 @@ const TicTacToe = () => {
           </div>
         ))}
       </div>
-      <p className="ttt-status">
+      <p className="score-display">
         {winner
-          ? `Winner: ${winner}`
+          ? `🎉 Winner: ${winner}`
           : isDraw
-          ? "It's a draw!"
+          ? "🤝 It's a draw!"
           : `Next player: ${xIsNext ? "X" : "O"}`}
       </p>
-      <button className="ttt-restart" onClick={restartGame}>
+      <button className="restart-button" onClick={restartGame}>
         Restart
       </button>
     </div>

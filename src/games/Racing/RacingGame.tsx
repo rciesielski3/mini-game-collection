@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./RacingGame.css";
 
 const LANE_COUNT = 8;
@@ -8,7 +7,7 @@ const OBSTACLE_INTERVAL = 1500;
 const CAR_WIDTH = 40;
 const OBSTACLE_HEIGHT = 20;
 
-const RacingGame = () => {
+const RacingGame: React.FC = () => {
   const [lane, setLane] = React.useState(1);
   const [obstacles, setObstacles] = React.useState<
     { lane: number; y: number }[]
@@ -78,26 +77,28 @@ const RacingGame = () => {
   };
 
   return (
-    <div className="racing-container">
-      <h2>Racing Game</h2>
-      <div className="racing-score">Score: {score}</div>
+    <div className="game-container">
+      <h2 className="game-title">🏎️ Racing Game</h2>
+
+      <div className="score-display">Score: {score}</div>
+
       <div
         ref={gameRef}
-        className="racing-game"
+        className="racing-road"
         style={{
           width: `${LANE_COUNT * CAR_WIDTH}px`,
           height: `${GAME_HEIGHT}px`,
         }}
       >
         <div
-          className="racing-car"
+          className="car"
           style={{ left: `${lane * CAR_WIDTH}px`, width: `${CAR_WIDTH}px` }}
         />
 
         {obstacles.map((ob, i) => (
           <div
             key={i}
-            className="racing-obstacle"
+            className="obstacle"
             style={{
               top: `${ob.y}px`,
               left: `${ob.lane * CAR_WIDTH}px`,
@@ -107,19 +108,19 @@ const RacingGame = () => {
           />
         ))}
       </div>
-
+      <p className="instruction">Use ⬅️ and ➡️ arrow keys to avoid obstacles</p>
       {gameOver ? (
-        <div className="racing-over">
-          <p>Game Over!</p>
-          <button onClick={startGame}>Restart</button>
+        <div className="game-over">
+          <p>💥 Game Over!</p>
+          <button className="restart-button" onClick={startGame}>
+            Restart
+          </button>
         </div>
       ) : !running ? (
-        <button className="wam-start" onClick={startGame}>
+        <button className="game-button" onClick={startGame}>
           Start Game
         </button>
-      ) : (
-        <p className="racing-controls">Use ⬅️ and ➡️ to move the car</p>
-      )}
+      ) : null}
     </div>
   );
 };

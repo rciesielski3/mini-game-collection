@@ -1,66 +1,74 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import "./SquaresGame.css";
 
-const NUM_SQUARES = 6;
-
-const getRandomHexColor = (): string => {
-  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  return `#${randomColor.padStart(6, "0")}`; // Ensure 6-digit color
+const generateRandomColor = (): string => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 };
 
 const SquaresGame: React.FC = () => {
-  const [targetColor, setTargetColor] = useState<string>("");
-  const [colors, setColors] = useState<string[]>([]);
-  const [message, setMessage] = useState<string>("");
-  const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [colors, setColors] = React.useState<string[]>([]);
+  const [targetColor, setTargetColor] = React.useState<string>("");
+  const [score, setScore] = React.useState(0);
+  const [feedback, setFeedback] = React.useState<string>("");
 
-  const initializeGame = useCallback(() => {
-    const newColors = Array.from({ length: NUM_SQUARES }, getRandomHexColor);
+  const generateColors = () => {
+    const newColors = Array.from({ length: 6 }, () => generateRandomColor());
+    const pickedColor = newColors[Math.floor(Math.random() * newColors.length)];
     setColors(newColors);
-    const randomIndex = Math.floor(Math.random() * newColors.length);
-    setTargetColor(newColors[randomIndex]);
-    setMessage("");
-    setIsCorrect(false);
+    setTargetColor(pickedColor);
+  };
+
+  React.useEffect(() => {
+    generateColors();
   }, []);
 
-  useEffect(() => {
-    initializeGame();
-  }, [initializeGame]);
-
-  const handleSquareClick = (color: string): void => {
-    const correct = color === targetColor;
-    setIsCorrect(correct);
-    setMessage(correct ? "Correct! 🎉" : "Try again!");
-
-    if (correct) {
-      setTimeout(initializeGame, 1500); // Reset after correct guess
+  const handleClick = (color: string) => {
+    if (color === targetColor) {
+      setScore((prev) => prev + 1);
+      setFeedback("✅ Correct!");
+      generateColors();
+    } else {
+      setFeedback("❌ Try again");
     }
+  };
+
+  const resetGame = () => {
+    setScore(0);
+    setFeedback("");
+    generateColors();
   };
 
   return (
     <div className="game-container">
-      <h2 className="game-title">
-        Guess the Color: <span className="color-value">{targetColor}</span>
-      </h2>
+      <h2 className="game-title">🎨 Color Match</h2>
+      <div className="score-display">Score: {score}</div>
 
-      <div className="squares-grid">
-        {colors.map((color, index) => (
-          <button
-            key={`${color}-${index}`}
-            className="color-square"
-            style={{ backgroundColor: color }}
-            onClick={() => handleSquareClick(color)}
-            aria-label={`Color square ${index + 1}`}
-          />
-        ))}
+      <div className="target-color">
+        Target: <span>{targetColor}</span>
       </div>
 
-      <p className={`message ${isCorrect ? "text-success" : "text-error"}`}>
-        {message}
+      <div className="color-grid">
+        {colors.map((color, idx) => (
+          <div
+            key={idx}
+            className="color-square"
+            style={{ backgroundColor: color }}
+            onClick={() => handleClick(color)}
+          ></div>
+        ))}
+      </div>
+      <p className="instruction">
+        Click the square that matches the target color below.
       </p>
+      {feedback && <p className="instruction">{feedback}</p>}
 
-      <button className="reset-button" onClick={initializeGame}>
-        New Colors
+      <button className="restart-button" onClick={resetGame}>
+        Restart
       </button>
     </div>
   );

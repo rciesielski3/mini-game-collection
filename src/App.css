@@ -1,43 +1,53 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .app-wrapper {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #575757 0%, #9ab7c6 100%);
   min-height: 100vh;
+  background: linear-gradient(135deg, #575757 0%, #9ab7c6 100%);
 }
 
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: grid;
   justify-content: center;
   align-items: center;
-  /* padding: 1rem; */
   background: radial-gradient(circle, #374458 0%, #b7c4ca 100%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.app-title {
-  text-align: center;
-  font-size: 2rem;
-  margin: 0.5rem 0;
-  color: #14005e;
 }
 
 .app-title {
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 0.5rem;
+  margin: 0.05rem 0;
   font-weight: 700;
+  color: #14005e;
+  text-shadow: 2px 2px 4px #989696;
 }
 
 .app-description {
   text-align: center;
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #c1bed0;
+}
+
+.game-scroll-area {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .game-grid {
   display: grid;
-  gap: 1.5rem;
-  padding: 2rem 4rem;
+  gap: 2rem;
+  padding: 1.5rem 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   flex-grow: 1;
 }

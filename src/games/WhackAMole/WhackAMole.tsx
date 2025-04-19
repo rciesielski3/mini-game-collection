@@ -1,72 +1,58 @@
 import React from "react";
-
 import "./WhackAMole.css";
 
-const MOLE_COUNT = 9;
-const GAME_TIME = 15000;
+const NUM_HOLES = 9;
 
-const WhackAMole = () => {
-  const [activeMole, setActiveMole] = React.useState<number | null>(null);
+const WhackAMole: React.FC = () => {
   const [score, setScore] = React.useState(0);
-  const [timeLeft, setTimeLeft] = React.useState(GAME_TIME / 1000);
-  const [gameRunning, setGameRunning] = React.useState(false);
-  const intervalRef = React.useRef<number | null>(null);
-  const timerRef = React.useRef<number | null>(null);
+  const [activeHole, setActiveHole] = React.useState<number | null>(null);
+  const [gameOn, setGameOn] = React.useState(false);
+  const moleTimerRef = React.useRef<number | null>(null);
 
   const startGame = () => {
     setScore(0);
-    setTimeLeft(GAME_TIME / 1000);
-    setGameRunning(true);
+    setGameOn(true);
+    setActiveHole(null);
 
-    intervalRef.current = window.setInterval(() => {
-      const next = Math.floor(Math.random() * MOLE_COUNT);
-      setActiveMole(next);
-    }, 700);
-
-    timerRef.current = window.setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          stopGame();
-          return 0;
-        }
-        return prev - 1;
-      });
+    moleTimerRef.current = window.setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * NUM_HOLES);
+      setActiveHole(randomIndex);
     }, 1000);
   };
 
   const stopGame = () => {
-    clearInterval(intervalRef.current!);
-    clearInterval(timerRef.current!);
-    setGameRunning(false);
-    setActiveMole(null);
+    setGameOn(false);
+    setActiveHole(null);
+    if (moleTimerRef.current) clearInterval(moleTimerRef.current);
   };
 
   const handleWhack = (index: number) => {
-    if (index === activeMole) {
+    if (index === activeHole) {
       setScore((prev) => prev + 1);
-      setActiveMole(null);
+      setActiveHole(null);
     }
   };
 
   return (
-    <div className="wam-container">
-      <h2>Whack-a-Mole</h2>
-      <div className="wam-info">
-        <p>Score: {score}</p>
-        <p>Time: {timeLeft}s</p>
-      </div>
-      <div className="wam-grid">
-        {Array.from({ length: MOLE_COUNT }).map((_, i) => (
-          <div
-            key={i}
-            className={`wam-hole ${activeMole === i ? "active" : ""}`}
-            onClick={() => handleWhack(i)}
-          />
+    <div className="game-container">
+      <h2 className="game-title">🔨 Whack a Mole</h2>
+      <div className="score-display">Score: {score}</div>
+
+      <div className="grid">
+        {Array.from({ length: NUM_HOLES }).map((_, i) => (
+          <div key={i} className="hole" onClick={() => handleWhack(i)}>
+            {activeHole === i && <div className="mole" />}
+          </div>
         ))}
       </div>
-      {!gameRunning && (
-        <button className="wam-start" onClick={startGame}>
+      <p className="instruction">Click the green mole when it pops up!</p>
+      {!gameOn ? (
+        <button className="game-button" onClick={startGame}>
           Start Game
+        </button>
+      ) : (
+        <button className="restart-button" onClick={stopGame}>
+          Stop
         </button>
       )}
     </div>

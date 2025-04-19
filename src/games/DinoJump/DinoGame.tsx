@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./DinoGame.css";
 
 const GAME_HEIGHT = 250;
@@ -111,6 +110,7 @@ const DinoGame = () => {
 
   return (
     <div className="game-container">
+      <h2 className="game-title">🦖 Dino Jump</h2>
       <div className="score-display">Score: {score}</div>
       <div className="game-background" style={{ height: GAME_HEIGHT }}>
         <div className="dino" style={{ bottom: `${y}px` }}></div>
@@ -133,7 +133,7 @@ const DinoGame = () => {
         </div>
       ) : (
         <p className="instruction">
-          Press <kbd>Space</kbd> to jump
+          Press <kbd>Space</kbd> to jump over obstacles
         </p>
       )}
     </div>

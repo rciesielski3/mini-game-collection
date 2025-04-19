@@ -1,8 +1,3 @@
-.ttt-container {
-  text-align: center;
-  font-family: sans-serif;
-}
-
 .ttt-board {
   display: grid;
   grid-template-columns: repeat(3, 60px);
@@ -22,40 +17,13 @@
   cursor: pointer;
   border: 2px solid #ccc;
   transition: background 0.2s;
+  font-weight: bold;
 }
 
 .cell-x {
   color: #f44336;
-  font-weight: bold;
 }
 
 .cell-o {
   color: #2196f3;
-  font-weight: bold;
-}
-
-.ttt-status {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.ttt-restart {
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.ttt-restart {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 1rem;
-  background-color: #9d0202;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.ttt-restart:hover {
-  background-color: #7d0303;
 }

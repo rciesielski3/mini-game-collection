@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import GameModal from "./components/GameModal";
+import GameModal from "./components/GameModal/GameModal";
 import GameCard from "./components/GameCard/GameCard";
 import Footer from "./components/Footer/Footer";
 
@@ -67,23 +67,26 @@ const App = () => {
         </p>
       </header>
 
-      <div className="game-grid">
-        {GAMES.map((game) => (
-          <GameCard
-            key={game.title}
-            emoji={game.emoji}
-            title={game.title}
-            description={game.description}
-            onClick={() => setSelectedGame(game.component)}
-          />
-        ))}
-      </div>
+      <main className="game-scroll-area">
+        <div className="game-grid">
+          {GAMES.map((game) => (
+            <GameCard
+              key={game.title}
+              emoji={game.emoji}
+              title={game.title}
+              description={game.description}
+              onClick={() => setSelectedGame(game.component)}
+            />
+          ))}
+        </div>
+      </main>
+
+      <Footer />
 
       <GameModal
         gameName={selectedGame}
         onClose={() => setSelectedGame(null)}
       />
-      <Footer />
     </div>
   );
 };
