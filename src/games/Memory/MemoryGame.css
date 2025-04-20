@@ -10,7 +10,7 @@
 .memory-card {
   width: 80px;
   height: 80px;
-  background-color: #607d8b;
+  background-color: #cbc8c7;
   color: white;
   font-size: 2rem;
   display: flex;
@@ -24,7 +24,7 @@
 
 .memory-card.flipped,
 .memory-card.matched {
-  background-color: #285e2a;
+  background-color: #5587a9;
 }
 
 .memory-card.matched {

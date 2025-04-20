@@ -141,7 +141,9 @@ const SnakeGame: React.FC = () => {
           );
         })}
       </div>
-      <p className="instruction">Use arrow keys or WASD to move the snake</p>
+      <p className="instruction">
+        Use arrow keys ⬅️ ⬆️ ⬇️ ➡️ or WASD to move the snake
+      </p>
       {!started ? (
         <button className="game-button" onClick={startGame}>
           Start Game
