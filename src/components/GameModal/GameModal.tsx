@@ -10,6 +10,7 @@ import ReactionTimeGame from "../../games/ReactionTime/ReactionTimeGame";
 import RacingGame from "../../games/Racing/RacingGame";
 import SquaresGame from "../../games/Squares/SquaresGame";
 import MemoryGame from "../../games/Memory/MemoryGame";
+import AdBanner from "../AdBanner/AdBanner";
 
 type Props = {
   gameName: string | null;
@@ -57,6 +58,7 @@ const GameModal = ({ gameName, onClose }: Props) => {
           ❌
         </button>
         {renderGame()}
+        <AdBanner />
       </div>
     </div>,
     document.body
