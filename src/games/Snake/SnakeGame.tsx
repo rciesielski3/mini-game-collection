@@ -5,17 +5,18 @@ import "./SnakeGame.css";
 type Coord = { x: number; y: number };
 
 const BOARD_SIZE = 10;
-const INITIAL_SNAKE = [{ x: 2, y: 2 }];
+const INITIAL_SNAKE: Coord[] = [{ x: 2, y: 2 }];
 const INITIAL_DIRECTION = { x: 1, y: 0 };
 
-const SnakeGame = () => {
-  const [snake, setSnake] = React.useState(INITIAL_SNAKE);
-  const [food, setFood] = React.useState(generateFood(INITIAL_SNAKE));
+const SnakeGame: React.FC = () => {
+  const [snake, setSnake] = React.useState<Coord[]>(INITIAL_SNAKE);
+  const [food, setFood] = React.useState<Coord>(generateFood(INITIAL_SNAKE));
   const [direction, setDirection] = React.useState(INITIAL_DIRECTION);
   const [isGameOver, setIsGameOver] = React.useState(false);
   const [score, setScore] = React.useState(0);
   const gameRef = React.useRef<HTMLDivElement>(null);
   const intervalRef = React.useRef<number | null>(null);
+  const [started, setStarted] = React.useState(false);
 
   function generateFood(snakeBody: Coord[]): Coord {
     while (true) {
@@ -30,6 +31,7 @@ const SnakeGame = () => {
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!started || isGameOver) return;
       switch (e.key) {
         case "ArrowUp":
         case "w":
@@ -56,9 +58,11 @@ const SnakeGame = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [direction]);
+  }, [direction, started, isGameOver]);
 
   React.useEffect(() => {
+    if (!started) return;
+
     intervalRef.current = window.setInterval(() => {
       setSnake((prev) => {
         const newHead = {
@@ -85,7 +89,7 @@ const SnakeGame = () => {
 
         if (newHead.x === food.x && newHead.y === food.y) {
           setFood(generateFood(newSnake));
-          setScore((s) => s + 0.5);
+          setScore((s) => s + 1);
         } else {
           newSnake.pop();
         }
@@ -95,7 +99,11 @@ const SnakeGame = () => {
     }, 300);
 
     return () => clearInterval(intervalRef.current!);
-  }, [direction, food]);
+  }, [direction, food, started]);
+
+  const startGame = () => {
+    setStarted(true);
+  };
 
   const restart = () => {
     setSnake(INITIAL_SNAKE);
@@ -103,11 +111,12 @@ const SnakeGame = () => {
     setFood(generateFood(INITIAL_SNAKE));
     setIsGameOver(false);
     setScore(0);
+    setStarted(false);
   };
 
   return (
-    <div className="snake-wrapper" ref={gameRef} tabIndex={0}>
-      <h2 className="snake-title">Snake Game</h2>
+    <div className="game-container" ref={gameRef} tabIndex={0}>
+      <h2 className="game-title">🐍 Snake Game</h2>
       <div className="score-display">Score: {score}</div>
       <div
         className="snake-board"
@@ -132,14 +141,21 @@ const SnakeGame = () => {
           );
         })}
       </div>
-      {isGameOver && (
+      <p className="instruction">
+        Use arrow keys ⬅️ ⬆️ ⬇️ ➡️ or WASD to move the snake
+      </p>
+      {!started ? (
+        <button className="game-button" onClick={startGame}>
+          Start Game
+        </button>
+      ) : isGameOver ? (
         <div className="snake-over">
           <p>Game Over!</p>
           <button className="restart-button" onClick={restart}>
             Restart
           </button>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

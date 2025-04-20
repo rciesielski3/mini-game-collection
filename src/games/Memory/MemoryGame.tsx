@@ -1,58 +1,89 @@
 import React from "react";
-
 import "./MemoryGame.css";
 
-const CARD_VALUES = ["A", "B", "C", "D", "E", "F"];
-
-const shuffle = (array: string[]) => {
-  return [...array, ...array].sort(() => Math.random() - 0.5);
+type Card = {
+  id: number;
+  emoji: string;
 };
 
-export const MemoryGame = () => {
-  const [cards, setCards] = React.useState<string[]>([]);
+const emojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊"];
+
+const generateCards = (): Card[] => {
+  const cards = [...emojis, ...emojis].map((emoji, i) => ({
+    id: i,
+    emoji,
+  }));
+  return cards.sort(() => Math.random() - 0.5);
+};
+
+const MemoryGame: React.FC = () => {
+  const [cards, setCards] = React.useState<Card[]>(generateCards());
   const [flipped, setFlipped] = React.useState<number[]>([]);
   const [matched, setMatched] = React.useState<number[]>([]);
-
-  React.useEffect(() => {
-    setCards(shuffle(CARD_VALUES));
-  }, []);
+  const [score, setScore] = React.useState(0);
+  const isProcessing = React.useRef(false);
 
   const handleClick = (index: number) => {
     if (
-      flipped.length === 2 ||
+      isProcessing.current ||
       flipped.includes(index) ||
       matched.includes(index)
     )
       return;
+
     const newFlipped = [...flipped, index];
     setFlipped(newFlipped);
+
     if (newFlipped.length === 2) {
+      isProcessing.current = true;
       const [first, second] = newFlipped;
-      if (cards[first] === cards[second]) {
-        setMatched([...matched, first, second]);
+      if (cards[first].emoji === cards[second].emoji) {
+        setMatched((prev) => [...prev, first, second]);
+        setScore((prev) => prev + 1);
       }
-      setTimeout(() => setFlipped([]), 1000);
+      setTimeout(() => {
+        setFlipped([]);
+        isProcessing.current = false;
+      }, 1000);
     }
   };
 
+  const resetGame = () => {
+    setCards(generateCards());
+    setFlipped([]);
+    setMatched([]);
+    setScore(0);
+    isProcessing.current = false;
+  };
+
   return (
-    <div className="memory-container">
-      <h2>Memory Game</h2>
+    <div className="game-container">
+      <h2 className="game-title">🧠 Memory Game</h2>
+      <div className="score-display">Pairs Matched: {score}</div>
       <div className="memory-grid">
-        {cards.map((value, index) => (
-          <div
-            key={index}
-            className={`card ${
-              flipped.includes(index) || matched.includes(index)
-                ? "flipped"
-                : ""
-            }`}
-            onClick={() => handleClick(index)}
-          >
-            {flipped.includes(index) || matched.includes(index) ? value : "?"}
-          </div>
-        ))}
+        {cards.map((card, index) => {
+          const isFlipped = flipped.includes(index) || matched.includes(index);
+          return (
+            <div
+              key={card.id}
+              className={`memory-card ${
+                matched.includes(index) ? "matched" : isFlipped ? "flipped" : ""
+              }`}
+              onClick={() => handleClick(index)}
+            >
+              {isFlipped ? card.emoji : "❓"}
+            </div>
+          );
+        })}
       </div>
+      <p className="instruction">
+        Flip and match all cards as fast as you can!
+      </p>
+      <button className="restart-button" onClick={resetGame}>
+        Restart
+      </button>
     </div>
   );
 };
+
+export default MemoryGame;

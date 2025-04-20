@@ -1,10 +1,7 @@
 .snake-wrapper {
   text-align: center;
   outline: none;
-}
-
-.snake-title {
-  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .snake-board {
@@ -18,6 +15,7 @@
   width: 20px;
   height: 20px;
   border-radius: 2px;
+  background-color: #cbc8c7;
 }
 
 .cell.snake {
@@ -35,19 +33,5 @@
 
 .snake-over {
   color: red;
-}
-
-.restart-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
   margin-top: 1rem;
-  background-color: #9d0202;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.restart-button:hover {
-  background-color: #7d0303;
 }

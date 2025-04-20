@@ -1,58 +1,73 @@
 import React from "react";
-
 import "./ReactionTimeGame.css";
 
-const ReactionTimeGame = () => {
-  const [waiting, setWaiting] = React.useState(false);
-  const [ready, setReady] = React.useState(false);
-  const [startTime, setStartTime] = React.useState<number | null>(null);
+const ReactionTimeGame: React.FC = () => {
+  const [isWaiting, setIsWaiting] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(false);
   const [reactionTime, setReactionTime] = React.useState<number | null>(null);
   const timeoutRef = React.useRef<number | null>(null);
+  const startTimeRef = React.useRef<number>(0);
 
-  const startTest = () => {
+  const startGame = () => {
+    setIsWaiting(true);
+    setIsReady(false);
     setReactionTime(null);
-    setWaiting(true);
-    setReady(false);
 
-    const delay = Math.floor(Math.random() * 3000) + 2000;
     timeoutRef.current = window.setTimeout(() => {
-      setStartTime(Date.now());
-      setReady(true);
-      setWaiting(false);
-    }, delay);
+      setIsReady(true);
+      startTimeRef.current = Date.now();
+    }, Math.random() * 2000 + 2000);
   };
 
   const handleClick = () => {
-    if (waiting) {
+    if (isWaiting && !isReady) {
       clearTimeout(timeoutRef.current!);
-      setWaiting(false);
-      alert("Too soon! Wait for green.");
-    } else if (ready && startTime) {
-      const end = Date.now();
-      setReactionTime(end - startTime);
-      setReady(false);
+      setIsWaiting(false);
+      setReactionTime(null);
+    } else if (isReady) {
+      const endTime = Date.now();
+      setReactionTime(endTime - startTimeRef.current);
+      setIsReady(false);
+      setIsWaiting(false);
     }
   };
 
-  React.useEffect(() => {
-    return () => clearTimeout(timeoutRef.current!);
-  }, []);
+  const resetGame = () => {
+    setReactionTime(null);
+    setIsWaiting(false);
+    setIsReady(false);
+  };
 
   return (
-    <div
-      className={`reaction-wrapper ${
-        ready ? "green" : waiting ? "waiting" : "idle"
-      }`}
-      onClick={handleClick}
-    >
-      {!waiting && !ready && !reactionTime && (
-        <button className="reaction-start" onClick={startTest}>
-          Start Test
+    <div className="game-container">
+      <h2 className="game-title">⚡ Reaction Time</h2>
+
+      <div
+        className={`reaction-box ${
+          isReady ? "ready" : isWaiting ? "waiting" : ""
+        }`}
+        onClick={handleClick}
+      >
+        {isReady
+          ? "Click!"
+          : isWaiting
+          ? "Wait for green..."
+          : "Click to start"}
+      </div>
+      {reactionTime !== null && (
+        <>
+          <p className="score-display">Your reaction time: {reactionTime} ms</p>
+          <button className="restart-button" onClick={resetGame}>
+            Try Again
+          </button>
+        </>
+      )}
+      <p className="instruction">Click when the box turns green!</p>
+      {!isWaiting && reactionTime === null && (
+        <button className="game-button" onClick={startGame}>
+          Start
         </button>
       )}
-      {waiting && <p>Wait for green...</p>}
-      {ready && <p>Click!</p>}
-      {reactionTime && <p>Your reaction time: {reactionTime}ms</p>}
     </div>
   );
 };

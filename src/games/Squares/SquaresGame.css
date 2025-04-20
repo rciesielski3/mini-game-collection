@@ -1,20 +1,28 @@
-.squares-container {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.squares-grid {
+.color-grid {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 16px;
+  grid-template-columns: repeat(3, 80px);
+  gap: 12px;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem auto;
 }
 
-.square {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
+.color-square {
+  width: 80px;
+  height: 80px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: 2px solid #ccc;
+  transition: transform 0.2s, border-color 0.3s;
+}
+
+.color-square:hover {
+  transform: scale(1.05);
+  border-color: #333;
+}
+
+.target-color {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #444;
+  font-size: 1rem;
 }

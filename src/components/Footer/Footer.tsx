@@ -7,7 +7,10 @@ const Footer = () => {
     <footer className="app-footer">
       <p>
         Built with 💡 by{" "}
-        <a href="https://github.com/rciesielski3" className="underline">
+        <a
+          href="https://rciesielski3.github.io/portfolio/"
+          className="underline"
+        >
           Rafal Ciesielski
         </a>
       </p>
