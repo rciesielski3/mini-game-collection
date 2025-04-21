@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
+
 import GameModal from "./components/GameModal/GameModal";
 import GameCard from "./components/GameCard/GameCard";
 import Footer from "./components/Footer/Footer";
+import DashboardNavigator from "./components/DashboardNavigator/DashboardNavigator";
 
 const GAMES = [
   {
@@ -67,6 +69,7 @@ const App = () => {
         </p>
       </header>
 
+      <DashboardNavigator onSelectGame={(game) => setSelectedGame(game)} />
       <main className="game-scroll-area">
         <div className="game-grid">
           {GAMES.map((game) => (

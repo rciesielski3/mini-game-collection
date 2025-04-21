@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./GameModal.css";
 
+import { saveScore } from "../../utils/firestore";
 import SnakeGame from "../../games/Snake/SnakeGame";
 import DinoGame from "../../games/DinoJump/DinoGame";
 import TicTacToe from "../../games/TicTacToe/TicTacToe";
@@ -10,9 +11,6 @@ import ReactionTimeGame from "../../games/ReactionTime/ReactionTimeGame";
 import RacingGame from "../../games/Racing/RacingGame";
 import SquaresGame from "../../games/Squares/SquaresGame";
 import MemoryGame from "../../games/Memory/MemoryGame";
-import ReactionSequenceGame from "../../games/ReactionSequence/ReactionSequenceGame";
-import MathQuickfireGame from "../../games/MathQuickfire/MathQuickfireGame";
-import { saveScore } from "../../utils/firestore";
 
 type Props = {
   gameName: string | null;
@@ -54,10 +52,7 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <SquaresGame onScore={handleScoreSubmit} />;
       case "MemoryGame":
         return <MemoryGame onScore={handleScoreSubmit} />;
-      case "ReactionSequenceGame":
-        return <ReactionSequenceGame onScore={handleScoreSubmit} />;
-      case "MathQuickfireGame":
-        return <MathQuickfireGame onScore={handleScoreSubmit} />;
+
       default:
         return null;
     }

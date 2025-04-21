@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchScores, ScoreRecord } from "../../utils/firestore";
 import "./UserProfileStats.css";
 
-export type ScoreRecord = {
-  game: string;
-  score: number;
-  timestamp: number;
-};
-
 interface Props {
-  scores: ScoreRecord[];
   onSelectGame?: (game: string) => void;
 }
 
-const UserProfileStats: React.FC<Props> = ({ scores, onSelectGame }) => {
+const UserProfileStats: React.FC<Props> = ({ onSelectGame }) => {
+  const [scores, setScores] = React.useState<ScoreRecord[]>([]);
+
+  React.useEffect(() => {
+    fetchScores().then(setScores);
+  }, []);
+
   const sortedScores = [...scores].sort((a, b) => b.score - a.score);
 
   const uniqueTopGames: string[] = [];
@@ -24,7 +24,7 @@ const UserProfileStats: React.FC<Props> = ({ scores, onSelectGame }) => {
   const lastPlayed = scores.sort((a, b) => b.timestamp - a.timestamp)[0]?.game;
 
   return (
-    <div className="profile-stats">
+    <div className="profile-stats dashboard-section">
       <h3>👤 Your Stats</h3>
       <div className="profile-section">
         <strong>Top Games:</strong>
