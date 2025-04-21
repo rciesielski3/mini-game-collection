@@ -1,0 +1,20 @@
+.rsq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 80px);
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+.rsq-box {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.rsq-box.active {
+  background-color: #4caf50;
+}

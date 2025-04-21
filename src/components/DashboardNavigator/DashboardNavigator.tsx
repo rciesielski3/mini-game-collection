@@ -14,16 +14,12 @@ const DashboardNavigator = ({
   return (
     <section className="dashboard-section">
       <div className="dashboard-toggle" onClick={() => setExpanded(!expanded)}>
-        📂 {expanded ? "Hide Dashboard" : "Show Dashboard"}
+        {expanded ? "📂 Hide dashboard" : "📁 Show dashboard"}
       </div>
       {expanded && (
         <div className="dashboard-content">
-          <div className="dashboard-box">
-            <DailyChallenge onPlay={onSelectGame} />
-          </div>
-          <div className="dashboard-box">
-            <UserProfileStats />
-          </div>
+          <DailyChallenge onPlay={onSelectGame} />
+          <UserProfileStats />
         </div>
       )}
     </section>

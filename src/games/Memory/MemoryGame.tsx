@@ -66,7 +66,7 @@ const MemoryGame = ({ onScore }: Props) => {
   return (
     <div className="game-container">
       <h2 className="game-title">🧠 Memory Game</h2>
-      <div className="score-display">Pairs Matched: {score}</div>
+      <div className="score-display">Matched: {score}</div>
       <div className="memory-grid">
         {cards.map((card, index) => {
           const isFlipped = flipped.includes(index) || matched.includes(index);
