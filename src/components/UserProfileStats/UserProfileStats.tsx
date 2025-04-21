@@ -25,7 +25,7 @@ const UserProfileStats: React.FC<Props> = ({ onSelectGame }) => {
 
   return (
     <div className="profile-stats dashboard-section">
-      <h3>👤 Your Stats</h3>
+      <h3 className="profile-title">👤 Your Stats</h3>
       <div className="profile-section">
         <strong>Top Games:</strong>
         <ul>
