@@ -2,11 +2,10 @@
   background: radial-gradient(circle, #1d5067 0%, #bbbcbe 100%);
   border-radius: 12px;
   border: 1px solid #434e74;
-  padding: 1rem;
   margin: 1rem auto;
   color: #f0f0f0;
-  max-width: 420px;
   width: 100%;
+  max-width: 420px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
 }
@@ -19,7 +18,7 @@
 }
 
 .profile-section {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .profile-section strong {

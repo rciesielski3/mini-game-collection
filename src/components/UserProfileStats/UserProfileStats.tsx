@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { fetchScores, ScoreRecord } from "../../utils/firestore";
 import "./UserProfileStats.css";
 

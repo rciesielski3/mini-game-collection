@@ -1,7 +1,7 @@
 .dashboard-toggle {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
   background: linear-gradient(145deg, #1d5067, #bbbcbe);
   color: #fff;

@@ -11,7 +11,8 @@ import ReactionTimeGame from "../../games/ReactionTime/ReactionTimeGame";
 import RacingGame from "../../games/Racing/RacingGame";
 import SquaresGame from "../../games/Squares/SquaresGame";
 import MemoryGame from "../../games/Memory/MemoryGame";
-import AdBanner from "../AdBanner/AdBanner";
+import ReactionSequenceGame from "../../games/ReactionSequence/ReactionSequenceGame";
+import MathQuickfireGame from "../../games/MathQuickfire/MathQuickfireGame";
 
 type Props = {
   gameName: string | null;
@@ -53,7 +54,10 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <SquaresGame onScore={handleScoreSubmit} />;
       case "MemoryGame":
         return <MemoryGame onScore={handleScoreSubmit} />;
-
+      case "ReactionSequenceGame":
+        return <ReactionSequenceGame onScore={handleScoreSubmit} />;
+      case "MathQuickfireGame":
+        return <MathQuickfireGame onScore={handleScoreSubmit} />;
       default:
         return null;
     }
@@ -66,7 +70,6 @@ const GameModal = ({ gameName, onClose }: Props) => {
           ❌
         </button>
         {renderGame()}
-        <AdBanner />
       </div>
     </div>,
     document.body

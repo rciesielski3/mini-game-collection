@@ -1,41 +1,65 @@
 # 🎮 Mini Game Collection
 
-A simple and fun React-based collection of classic games — each built with modern frontend best practices and styled for a colorful user experience.
+A fun, modular React + TypeScript app featuring a growing collection of mini-games — each styled with personality and built using modern best practices.
 
 ---
 
 ## 🚀 Live Demo
 
-Check it out here:  
-👉 **[https://mini-game-collection.vercel.app/](https://mini-game-collection.vercel.app/)**
+👉 [**https://mini-game-collection.vercel.app/**](https://mini-game-collection.vercel.app/)
 
 ---
 
-## 🕹️ Available Games
+## 🧠 Features
 
-- 🐍 Snake — Classic snake game with a twist.
-- 🦖 Dino Jump — Jump over obstacles in this fast-paced runner.
-- ❌🔵 Tic-Tac-Toe — Timeless two-player strategy.
-- 🔨 Whack a Mole — Tap the mole before it disappears!
-- ⚡ Reaction Time — Test how fast your reflexes are.
-- 🏎️ Racing Game — Dodge obstacles and survive the lanes.
-- 🎨 Color Match — Click the correct colored square.
-- 🧠 Memory Game — Flip and match all cards as fast as you can.
+- 🧩 Multiple interactive games
+- 🗂️ Expandable dashboard with:
+  - 🎯 Daily Challenge
+  - 👤 User Profile Stats (last played, top games)
+- 🏆 Score tracking & Firebase integration
+- 📱 Responsive layout and polished UI
+- 💾 Future-ready for: leaderboard, high scores, authentication
 
 ---
 
-## 🧩 Project Structure
+## 🕹️ Games Included
+
+- 🐍 Snake – Classic logic game with a twist
+- 🦖 Dino Jump – Side-scrolling obstacle jumper
+- ❌🔵 Tic-Tac-Toe – Timeless two-player strategy
+- 🔨 Whack a Mole – Test your speed with random targets
+- ⚡ Reaction Time – Measure your click reflex
+- ⏱️ Reaction Sequence – Memory-based repeat game
+- 🎨 Color Match – Match the correct color under time
+- 🧠 Memory Game – Flip cards and find matching pairs
+- 🏎️ Racing Game – Dodge obstacles in fast lanes
+- 🧮 Math Quickfire – Solve equations quickly
+
+---
+
+## 📁 Project Structure
 
 ```
 src/
-├── App.tsx # Main app wrapper with header, scrollable game grid and footer
-├── components/ # Shared components like Footer, GameCard, GameModal
-├── games/ # Each game is in its own folder with its .tsx and .css files
-├── global.css # Universal styles used across all games
-└── index.tsx # Entry point
+├── App.tsx                # Main wrapper
+├── index.tsx              # App entry point
+├── firebase.ts            # Firebase config & analytics
+├── global.css             # Base global styles
+├── utils/
+│   └── firestore.ts       # Firebase Firestore functions
+├── components/            # Shared UI components
+│   ├── DailyChallenge/
+│   ├── DashboardNavigator/
+│   ├── UserProfileStats/
+│   ├── GameCard/
+│   ├── GameModal/
+│   └── Footer/
+├── games/                 # Game logic & views
+│   ├── Snake/
+│   ├── Squares/
+│   ├── Memory/
+│   └── ...
 ```
-
-> ✅ All game logic is encapsulated and each game supports restart, score tracking, and UI responsiveness.
 
 ---
 
@@ -48,37 +72,45 @@ npm install
 npm start
 ```
 
-Runs on [http://localhost:3000](http://localhost:3000)
+Runs locally at: [http://localhost:3000](http://localhost:3000)
+
+> Requires Node.js and NPM
 
 ---
 
-## ✨ Built With
+## 🔐 Firebase Setup
 
-- [React](https://reactjs.org/)
-- TypeScript
-- Vite or CRA (depending on your setup)
-- CSS Modules / Global styles
+Create a `.env` file in the root directory with the following:
+
+```env
+REACT_APP_FIREBASE_API_KEY=yourKey
+REACT_APP_FIREBASE_AUTH_DOMAIN=...
+REACT_APP_FIREBASE_PROJECT_ID=...
+REACT_APP_FIREBASE_STORAGE_BUCKET=...
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=...
+REACT_APP_FIREBASE_APP_ID=...
+REACT_APP_FIREBASE_MEASUREMENT_ID=...
+```
 
 ---
 
 ## 📦 Deploy
 
-Hosted on **Vercel**  
-CI/CD automatically triggers with commits to \`main\`
+App is deployed via **Vercel** with continuous integration from `main`.
 
 ---
 
 ## 🧑‍💻 Author
 
-Created with 💡 by [**Rafał Ciesielski**](https://github.com/rciesielski3)
+Built with 💡 by [**Rafał Ciesielski**](https://github.com/rciesielski3)
 
-- [LinkedIn](https://www.linkedin.com/in/rafa%C5%82-ciesielski-820309100/)
-- [GitHub](https://github.com/rciesielski3)
-- [Portfolio](https://rciesielski3.github.io/portfolio/)
+- [🌐 Portfolio](https://rciesielski3.github.io/portfolio/)
+- [🐙 GitHub](https://github.com/rciesielski3)
+- [🔗 LinkedIn](https://www.linkedin.com/in/rafa%C5%82-ciesielski-820309100/)
 
 ---
 
 ## 📄 License
 
-Licensed under the MIT License.
-Credits appreciated if reused in portfolios or tutorials ✌️
+MIT License  
+Please credit if you reuse it in your own work 🙌

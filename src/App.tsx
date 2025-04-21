@@ -55,6 +55,18 @@ const GAMES = [
     description: "Flip and match all cards as fast as you can!",
     component: "MemoryGame",
   },
+  {
+    emoji: "⏱️",
+    title: "Reaction Sequence",
+    description: "Remembers sequences (like Simon Says) and repeat them.",
+    component: "ReactionSequenceGame",
+  },
+  {
+    emoji: "🧮",
+    title: "Math Quickfire",
+    description: "Solve math problems as fast as you can!",
+    component: "MathQuickfireGame",
+  },
 ];
 
 const App = () => {
