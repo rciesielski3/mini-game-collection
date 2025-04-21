@@ -7,7 +7,11 @@ const OBSTACLE_INTERVAL = 1500;
 const CAR_WIDTH = 40;
 const OBSTACLE_HEIGHT = 20;
 
-const RacingGame: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const RacingGame = ({ onScore }: Props) => {
   const [lane, setLane] = React.useState(1);
   const [obstacles, setObstacles] = React.useState<
     { lane: number; y: number }[]
@@ -64,11 +68,17 @@ const RacingGame: React.FC = () => {
     );
     if (collision) {
       setGameOver(true);
+      if (score > 0 && onScore) {
+        onScore(score);
+      }
       setRunning(false);
     }
   }, [obstacles, lane, running]);
 
   const startGame = () => {
+    if (score > 0 && onScore) {
+      onScore(score);
+    }
     setLane(1);
     setObstacles([]);
     setGameOver(false);

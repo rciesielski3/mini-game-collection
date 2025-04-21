@@ -10,7 +10,11 @@ const generateRandomColor = (): string => {
   return color;
 };
 
-const SquaresGame: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const SquaresGame = ({ onScore }: Props) => {
   const [colors, setColors] = React.useState<string[]>([]);
   const [targetColor, setTargetColor] = React.useState<string>("");
   const [score, setScore] = React.useState(0);
@@ -38,6 +42,9 @@ const SquaresGame: React.FC = () => {
   };
 
   const resetGame = () => {
+    if (score > 0 && onScore) {
+      onScore(score);
+    }
     setScore(0);
     setFeedback("");
     generateColors();

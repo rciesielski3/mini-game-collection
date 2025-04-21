@@ -10,6 +10,9 @@ import ReactionTimeGame from "../../games/ReactionTime/ReactionTimeGame";
 import RacingGame from "../../games/Racing/RacingGame";
 import SquaresGame from "../../games/Squares/SquaresGame";
 import MemoryGame from "../../games/Memory/MemoryGame";
+import ReactionSequenceGame from "../../games/ReactionSequence/ReactionSequenceGame";
+import MathQuickfireGame from "../../games/MathQuickfire/MathQuickfireGame";
+import { saveScore } from "../../utils/firestore";
 
 type Props = {
   gameName: string | null;
@@ -25,26 +28,36 @@ const GameModal = ({ gameName, onClose }: Props) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const handleScoreSubmit = (score: number) => {
+    if (gameName) {
+      saveScore(gameName, score);
+    }
+  };
+
   if (!gameName) return null;
 
   const renderGame = () => {
     switch (gameName) {
       case "Snake":
-        return <SnakeGame />;
+        return <SnakeGame onScore={handleScoreSubmit} />;
       case "DinoJump":
-        return <DinoGame />;
+        return <DinoGame onScore={handleScoreSubmit} />;
       case "TicTacToe":
-        return <TicTacToe />;
+        return <TicTacToe onScore={handleScoreSubmit} />;
       case "WhackAMole":
-        return <WhackAMole />;
+        return <WhackAMole onScore={handleScoreSubmit} />;
       case "ReactionTimeGame":
-        return <ReactionTimeGame />;
+        return <ReactionTimeGame onScore={handleScoreSubmit} />;
       case "RacingGame":
-        return <RacingGame />;
+        return <RacingGame onScore={handleScoreSubmit} />;
       case "SquaresGame":
-        return <SquaresGame />;
+        return <SquaresGame onScore={handleScoreSubmit} />;
       case "MemoryGame":
-        return <MemoryGame />;
+        return <MemoryGame onScore={handleScoreSubmit} />;
+      case "ReactionSequenceGame":
+        return <ReactionSequenceGame onScore={handleScoreSubmit} />;
+      case "MathQuickfireGame":
+        return <MathQuickfireGame onScore={handleScoreSubmit} />;
       default:
         return null;
     }
