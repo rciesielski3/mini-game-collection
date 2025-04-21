@@ -3,7 +3,11 @@ import "./TicTacToe.css";
 
 const emptyBoard = Array(9).fill(null);
 
-const TicTacToe: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const TicTacToe = ({ onScore }: Props) => {
   const [board, setBoard] = React.useState<(string | null)[]>(emptyBoard);
   const [xIsNext, setXIsNext] = React.useState(true);
 
@@ -23,6 +27,14 @@ const TicTacToe: React.FC = () => {
     setBoard(emptyBoard);
     setXIsNext(true);
   };
+
+  React.useEffect(() => {
+    if (winner && onScore) {
+      onScore(1);
+    } else if (isDraw && onScore) {
+      onScore(0.5);
+    }
+  }, [winner, isDraw]);
 
   return (
     <div className="game-container">

@@ -1,0 +1,58 @@
+.daily-challenge {
+  background: radial-gradient(circle, #1d5067 0%, #bbbcbe 100%);
+  border: 1px solid #434e74;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  color: #f8f8f8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.daily-challenge h3 {
+  font-size: 1.5rem;
+  color: #ffd54f;
+  margin-bottom: 0.75rem;
+}
+
+.daily-challenge p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #dfe6ec;
+}
+
+.challenge-complete {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.daily-challenge .game-button,
+.daily-challenge .complete-button {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.daily-challenge .game-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.daily-challenge .game-button:hover {
+  background-color: #1976d2;
+}
+
+.daily-challenge .complete-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.daily-challenge .complete-button:hover {
+  background-color: #388e3c;
+}

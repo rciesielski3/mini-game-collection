@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./GameModal.css";
 
+import { saveScore } from "../../utils/firestore";
 import SnakeGame from "../../games/Snake/SnakeGame";
 import DinoGame from "../../games/DinoJump/DinoGame";
 import TicTacToe from "../../games/TicTacToe/TicTacToe";
@@ -26,26 +27,33 @@ const GameModal = ({ gameName, onClose }: Props) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const handleScoreSubmit = (score: number) => {
+    if (gameName) {
+      saveScore(gameName, score);
+    }
+  };
+
   if (!gameName) return null;
 
   const renderGame = () => {
     switch (gameName) {
       case "Snake":
-        return <SnakeGame />;
+        return <SnakeGame onScore={handleScoreSubmit} />;
       case "DinoJump":
-        return <DinoGame />;
+        return <DinoGame onScore={handleScoreSubmit} />;
       case "TicTacToe":
-        return <TicTacToe />;
+        return <TicTacToe onScore={handleScoreSubmit} />;
       case "WhackAMole":
-        return <WhackAMole />;
+        return <WhackAMole onScore={handleScoreSubmit} />;
       case "ReactionTimeGame":
-        return <ReactionTimeGame />;
+        return <ReactionTimeGame onScore={handleScoreSubmit} />;
       case "RacingGame":
-        return <RacingGame />;
+        return <RacingGame onScore={handleScoreSubmit} />;
       case "SquaresGame":
-        return <SquaresGame />;
+        return <SquaresGame onScore={handleScoreSubmit} />;
       case "MemoryGame":
-        return <MemoryGame />;
+        return <MemoryGame onScore={handleScoreSubmit} />;
+
       default:
         return null;
     }

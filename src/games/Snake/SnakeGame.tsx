@@ -8,7 +8,11 @@ const BOARD_SIZE = 10;
 const INITIAL_SNAKE: Coord[] = [{ x: 2, y: 2 }];
 const INITIAL_DIRECTION = { x: 1, y: 0 };
 
-const SnakeGame: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const SnakeGame = ({ onScore }: Props) => {
   const [snake, setSnake] = React.useState<Coord[]>(INITIAL_SNAKE);
   const [food, setFood] = React.useState<Coord>(generateFood(INITIAL_SNAKE));
   const [direction, setDirection] = React.useState(INITIAL_DIRECTION);
@@ -82,6 +86,7 @@ const SnakeGame: React.FC = () => {
         if (hitWall || hitSelf) {
           setIsGameOver(true);
           clearInterval(intervalRef.current!);
+          if (onScore && score > 0) onScore(score);
           return prev;
         }
 

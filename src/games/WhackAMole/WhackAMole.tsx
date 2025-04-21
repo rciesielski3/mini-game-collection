@@ -4,7 +4,11 @@ import "./WhackAMole.css";
 const NUM_HOLES = 9;
 const GAME_DURATION = 30;
 
-const WhackAMole: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const WhackAMole = ({ onScore }: Props) => {
   const [score, setScore] = React.useState(0);
   const [activeHole, setActiveHole] = React.useState<number | null>(null);
   const [gameOn, setGameOn] = React.useState(false);
@@ -39,6 +43,9 @@ const WhackAMole: React.FC = () => {
     setActiveHole(null);
     if (moleTimerRef.current) clearInterval(moleTimerRef.current);
     if (countdownRef.current) clearInterval(countdownRef.current);
+    if (onScore && score > 0) {
+      onScore(score);
+    }
   };
 
   const handleWhack = (index: number) => {

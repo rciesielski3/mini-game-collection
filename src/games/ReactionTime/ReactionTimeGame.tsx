@@ -1,7 +1,11 @@
 import React from "react";
 import "./ReactionTimeGame.css";
 
-const ReactionTimeGame: React.FC = () => {
+type Props = {
+  onScore?: (score: number) => void;
+};
+
+const ReactionTimeGame = ({ onScore }: Props) => {
   const [isWaiting, setIsWaiting] = React.useState(false);
   const [isReady, setIsReady] = React.useState(false);
   const [reactionTime, setReactionTime] = React.useState<number | null>(null);
@@ -26,7 +30,9 @@ const ReactionTimeGame: React.FC = () => {
       setReactionTime(null);
     } else if (isReady) {
       const endTime = Date.now();
-      setReactionTime(endTime - startTimeRef.current);
+      const time = endTime - startTimeRef.current;
+      setReactionTime(time);
+      if (onScore) onScore(time);
       setIsReady(false);
       setIsWaiting(false);
     }
