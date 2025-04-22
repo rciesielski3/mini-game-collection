@@ -6,6 +6,7 @@ import {
   query,
   getDocs,
   orderBy,
+  where,
 } from "firebase/firestore";
 
 export type ScoreRecord = {
@@ -26,9 +27,18 @@ export const saveScore = async (game: string, score: number) => {
   }
 };
 
-export const fetchScores = async (): Promise<ScoreRecord[]> => {
+export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
   try {
-    const q = query(collection(db, "scores"), orderBy("timestamp", "desc"));
+    let q = query(collection(db, "scores"), orderBy("timestamp", "desc"));
+
+    if (game) {
+      q = query(
+        collection(db, "scores"),
+        where("game", "==", game),
+        orderBy("score", "desc")
+      );
+    }
+
     const snapshot = await getDocs(q);
     return snapshot.docs.map((doc) => {
       const data = doc.data();
