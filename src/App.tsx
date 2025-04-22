@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
+import useVisitorTracking from "./hooks/useVisitorTracking";
 import GameModal from "./components/GameModal/GameModal";
 import GameCard from "./components/GameCard/GameCard";
 import Footer from "./components/Footer/Footer";
@@ -71,6 +72,7 @@ const GAMES = [
 
 const App = () => {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
+  useVisitorTracking();
 
   return (
     <div className="app-wrapper">
@@ -80,7 +82,6 @@ const App = () => {
           Explore fun mini games to relax or challenge your brain 🧠
         </p>
       </header>
-
       <DashboardNavigator onSelectGame={(game) => setSelectedGame(game)} />
       <main className="game-scroll-area">
         <div className="game-grid">
@@ -95,9 +96,7 @@ const App = () => {
           ))}
         </div>
       </main>
-
       <Footer />
-
       <GameModal
         gameName={selectedGame}
         onClose={() => setSelectedGame(null)}
