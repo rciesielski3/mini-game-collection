@@ -4,6 +4,7 @@ import "./DashboardNavigator.css";
 import { updateVisitorCount } from "../../utils/metrics";
 import DailyChallenge from "../DailyChallenge/DailyChallenge";
 import UserProfileStats from "../UserProfileStats/UserProfileStats";
+import Leaderboard from "../Leaderboard/Leaderboard";
 
 const DashboardNavigator = ({
   onSelectGame,
@@ -32,6 +33,7 @@ const DashboardNavigator = ({
         <div className="dashboard-content">
           <DailyChallenge onPlay={onSelectGame} />
           <UserProfileStats />
+          <Leaderboard />
         </div>
       )}
     </section>

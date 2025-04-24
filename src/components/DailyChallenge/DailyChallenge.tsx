@@ -44,7 +44,7 @@ const DailyChallenge: React.FC<{ onPlay: (game: string) => void }> = ({
 
   return (
     <div className="daily-challenge">
-      <h3>🎯 Daily Challenge</h3>
+      <h3 className="daily-title">🎯 Daily Challenge</h3>
       <p>
         Today's game: <strong>{dailyGame}</strong>
       </p>

@@ -1,0 +1,50 @@
+.leaderboard-container {
+  background: radial-gradient(circle, #1d5067 0%, #bbbcbe 100%);
+  border: 1px solid #434e74;
+  border-radius: 10px;
+  margin: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  color: #f8f8f8;
+}
+
+.leaderboard-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #ffdd57;
+  text-shadow: 1px 1px 2px #333;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard-item {
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.leaderboard-item:nth-child(1) {
+  background: #ffd70033;
+  font-weight: bold;
+}
+
+.leaderboard-game {
+  color: #e0eaff;
+  font-weight: 500;
+}
+
+.leaderboard-score {
+  color: #b8ffb6;
+  font-weight: bold;
+}
