@@ -114,3 +114,5 @@ Built with 💡 by [**Rafał Ciesielski**](https://github.com/rciesielski3)
 
 MIT License  
 Please credit if you reuse it in your own work 🙌
+
+[☕ buy coffee](https://buycoffee.to/adateo)

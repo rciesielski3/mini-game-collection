@@ -14,6 +14,10 @@ const DashboardNavigator = ({
   const [expanded, setExpanded] = React.useState<boolean>(false);
   const [visitors, setVisitors] = React.useState<number | null>(null);
 
+  const handleBuyCoffee = () => {
+    window.open("https://buycoffee.to/adateo", "_blank");
+  };
+
   React.useEffect(() => {
     updateVisitorCount().then(setVisitors);
   }, []);
@@ -26,6 +30,9 @@ const DashboardNavigator = ({
           onClick={() => setExpanded(!expanded)}
         >
           {expanded ? "📂 Hide dashboard" : "📁 Show dashboard"}
+        </div>
+        <div className="dashboard-toggle" onClick={handleBuyCoffee}>
+          ☕ Buy Me a Coffee
         </div>
         <div className="visitor-button">👥 Visitors: {visitors}</div>
       </div>
