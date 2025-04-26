@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Leaderboard.css";
+
 import { fetchScores, ScoreRecord } from "../../utils/firestore";
 
 const Leaderboard = () => {
-  const [scores, setScores] = useState<ScoreRecord[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [scores, setScores] = React.useState<ScoreRecord[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchScores().then((data) => {
       setScores(data);
       setLoading(false);
