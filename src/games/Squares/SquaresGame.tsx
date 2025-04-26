@@ -1,6 +1,8 @@
 import React from "react";
 import "./SquaresGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 const generateRandomColor = (): string => {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -10,13 +12,9 @@ const generateRandomColor = (): string => {
   return color;
 };
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
 const GAME_DURATION = 30;
 
-const SquaresGame = ({ onScore }: Props) => {
+const SquaresGame = () => {
   const [colors, setColors] = React.useState<string[]>([]);
   const [targetColor, setTargetColor] = React.useState<string>("");
   const [score, setScore] = React.useState(0);
@@ -24,14 +22,7 @@ const SquaresGame = ({ onScore }: Props) => {
   const [gameStarted, setGameStarted] = React.useState(false);
   const [gameOver, setGameOver] = React.useState(false);
   const [feedback, setFeedback] = React.useState("");
-
   const timerRef = React.useRef<number | null>(null);
-
-  // Initial color grid is visible but no targetColor
-  React.useEffect(() => {
-    const newColors = Array.from({ length: 6 }, () => generateRandomColor());
-    setColors(newColors);
-  }, []);
 
   const startGame = () => {
     setScore(0);
@@ -40,7 +31,6 @@ const SquaresGame = ({ onScore }: Props) => {
     setGameOver(false);
     setFeedback("");
 
-    // Pick a target color from the existing board
     const picked = colors[Math.floor(Math.random() * colors.length)];
     setTargetColor(picked);
 
@@ -50,7 +40,7 @@ const SquaresGame = ({ onScore }: Props) => {
           clearInterval(timerRef.current!);
           setGameOver(true);
           setGameStarted(false);
-          if (onScore) onScore(score);
+          if (score > 0) saveScoreIfHighest("SquaresGame", score);
           return 0;
         }
         return prev - 1;
@@ -64,7 +54,6 @@ const SquaresGame = ({ onScore }: Props) => {
       setScore((prev) => prev + 1);
       setFeedback("✅ Correct!");
 
-      // Pick new target color and refresh the board
       const newColors = Array.from({ length: 6 }, () => generateRandomColor());
       const newTarget = newColors[Math.floor(Math.random() * newColors.length)];
       setColors(newColors);
@@ -75,7 +64,7 @@ const SquaresGame = ({ onScore }: Props) => {
   };
 
   const resetGame = () => {
-    if (score > 0 && onScore) onScore(score);
+    if (score > 0) saveScoreIfHighest("SquaresGame", score);
     setScore(0);
     setTimeLeft(GAME_DURATION);
     setGameStarted(false);
@@ -83,11 +72,15 @@ const SquaresGame = ({ onScore }: Props) => {
     setFeedback("");
     clearInterval(timerRef.current!);
 
-    // Reset board
     const newColors = Array.from({ length: 6 }, () => generateRandomColor());
     setColors(newColors);
     setTargetColor("");
   };
+
+  React.useEffect(() => {
+    const newColors = Array.from({ length: 6 }, () => generateRandomColor());
+    setColors(newColors);
+  }, []);
 
   return (
     <div className="game-container">

@@ -1,14 +1,12 @@
 import React from "react";
 import "./WhackAMole.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 const NUM_HOLES = 9;
 const GAME_DURATION = 30;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const WhackAMole = ({ onScore }: Props) => {
+const WhackAMole = () => {
   const [score, setScore] = React.useState(0);
   const [activeHole, setActiveHole] = React.useState<number | null>(null);
   const [gameOn, setGameOn] = React.useState(false);
@@ -43,9 +41,7 @@ const WhackAMole = ({ onScore }: Props) => {
     setActiveHole(null);
     if (moleTimerRef.current) clearInterval(moleTimerRef.current);
     if (countdownRef.current) clearInterval(countdownRef.current);
-    if (onScore && score > 0) {
-      onScore(score);
-    }
+    if (score > 0) saveScoreIfHighest("WhackAMoleGame", score);
   };
 
   const handleWhack = (index: number) => {

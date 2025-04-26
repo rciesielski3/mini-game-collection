@@ -1,11 +1,9 @@
 import React from "react";
 import "./ReactionTimeGame.css";
 
-type Props = {
-  onScore?: (score: number) => void;
-};
+import { saveScoreIfHighest } from "../../utils/firestore";
 
-const ReactionTimeGame = ({ onScore }: Props) => {
+const ReactionTimeGame = () => {
   const [isWaiting, setIsWaiting] = React.useState(false);
   const [isReady, setIsReady] = React.useState(false);
   const [reactionTime, setReactionTime] = React.useState<number | null>(null);
@@ -32,7 +30,7 @@ const ReactionTimeGame = ({ onScore }: Props) => {
       const endTime = Date.now();
       const time = endTime - startTimeRef.current;
       setReactionTime(time);
-      if (onScore) onScore(time);
+      if (time > 0) saveScoreIfHighest("ReactionTimeGame", time);
       setIsReady(false);
       setIsWaiting(false);
     }

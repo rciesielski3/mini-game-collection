@@ -1,17 +1,15 @@
 import React from "react";
 import "./RacingGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 const LANE_COUNT = 8;
 const GAME_HEIGHT = 300;
 const OBSTACLE_INTERVAL = 1500;
 const CAR_WIDTH = 40;
 const OBSTACLE_HEIGHT = 20;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const RacingGame = ({ onScore }: Props) => {
+const RacingGame = () => {
   const [lane, setLane] = React.useState(1);
   const [obstacles, setObstacles] = React.useState<
     { lane: number; y: number }[]
@@ -68,17 +66,13 @@ const RacingGame = ({ onScore }: Props) => {
     );
     if (collision) {
       setGameOver(true);
-      if (score > 0 && onScore) {
-        onScore(score);
-      }
+      if (score > 0) saveScoreIfHighest("RacingGame", score);
       setRunning(false);
     }
   }, [obstacles, lane, running]);
 
   const startGame = () => {
-    if (score > 0 && onScore) {
-      onScore(score);
-    }
+    if (score > 0) saveScoreIfHighest("RacingGame", score);
     setLane(1);
     setObstacles([]);
     setGameOver(false);

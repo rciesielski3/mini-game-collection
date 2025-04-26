@@ -27,7 +27,7 @@ const Leaderboard = () => {
             .slice(0, 5)
             .map((score, index) => (
               <li key={index} className="leaderboard-entry">
-                <span className="rank">{index + 1}.</span>
+                <span className="rank">{index + 1}. </span>
                 <span className="game-score">
                   {score.game}, score: {score.score}
                 </span>

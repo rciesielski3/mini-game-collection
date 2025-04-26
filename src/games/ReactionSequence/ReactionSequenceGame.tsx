@@ -1,13 +1,11 @@
 import React from "react";
 import "./ReactionSequenceGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 const SEQUENCE_LENGTH = 3;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const ReactionSequenceGame = ({ onScore }: Props) => {
+const ReactionSequenceGame = () => {
   const [sequence, setSequence] = React.useState<number[]>([]);
   const [playerInput, setPlayerInput] = React.useState<number[]>([]);
   const [showing, setShowing] = React.useState(false);
@@ -50,9 +48,7 @@ const ReactionSequenceGame = ({ onScore }: Props) => {
     if (sequence[nextInput.length - 1] !== idx) {
       setMessage("Wrong! Try again.");
       setGameOn(false);
-      if (score > 0 && onScore) {
-        onScore(score);
-      }
+      if (score > 0) saveScoreIfHighest("ReactionSequenceGame", score);
       return;
     }
 

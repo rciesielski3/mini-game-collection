@@ -1,6 +1,8 @@
 import React from "react";
 import "./MemoryGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 type Card = {
   id: number;
   emoji: string;
@@ -16,11 +18,7 @@ const generateCards = (): Card[] => {
   return cards.sort(() => Math.random() - 0.5);
 };
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const MemoryGame = ({ onScore }: Props) => {
+const MemoryGame = () => {
   const [cards, setCards] = React.useState<Card[]>(generateCards());
   const [flipped, setFlipped] = React.useState<number[]>([]);
   const [matched, setMatched] = React.useState<number[]>([]);
@@ -56,9 +54,7 @@ const MemoryGame = ({ onScore }: Props) => {
     setCards(generateCards());
     setFlipped([]);
     setMatched([]);
-    if (score > 0 && onScore) {
-      onScore(score);
-    }
+    if (score > 0) saveScoreIfHighest("MemoryGame", score);
     setScore(0);
     isProcessing.current = false;
   };

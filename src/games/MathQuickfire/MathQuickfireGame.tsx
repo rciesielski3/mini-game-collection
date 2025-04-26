@@ -1,6 +1,8 @@
 import React from "react";
 import "./MathQuickfireGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+
 const GAME_DURATION = 30;
 
 const generateQuestion = () => {
@@ -13,11 +15,7 @@ const generateQuestion = () => {
   };
 };
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const MathQuickfireGame = ({ onScore }: Props) => {
+const MathQuickfireGame = () => {
   const [question, setQuestion] = React.useState(generateQuestion());
   const [input, setInput] = React.useState("");
   const [score, setScore] = React.useState(0);
@@ -41,9 +39,7 @@ const MathQuickfireGame = ({ onScore }: Props) => {
         if (prev <= 1) {
           clearInterval(timer);
           setGameOn(false);
-          if (score > 0 && onScore) {
-            onScore(score);
-          }
+          if (score > 0) saveScoreIfHighest("MathQuickfireGame", score);
           return 0;
         }
         return prev - 1;

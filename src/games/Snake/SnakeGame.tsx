@@ -1,6 +1,7 @@
 import React from "react";
-
 import "./SnakeGame.css";
+
+import { saveScoreIfHighest } from "../../utils/firestore";
 
 type Coord = { x: number; y: number };
 
@@ -8,19 +9,15 @@ const BOARD_SIZE = 10;
 const INITIAL_SNAKE: Coord[] = [{ x: 2, y: 2 }];
 const INITIAL_DIRECTION = { x: 1, y: 0 };
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const SnakeGame = ({ onScore }: Props) => {
+const SnakeGame = () => {
   const [snake, setSnake] = React.useState<Coord[]>(INITIAL_SNAKE);
   const [food, setFood] = React.useState<Coord>(generateFood(INITIAL_SNAKE));
   const [direction, setDirection] = React.useState(INITIAL_DIRECTION);
   const [isGameOver, setIsGameOver] = React.useState(false);
   const [score, setScore] = React.useState(0);
+  const [started, setStarted] = React.useState(false);
   const gameRef = React.useRef<HTMLDivElement>(null);
   const intervalRef = React.useRef<number | null>(null);
-  const [started, setStarted] = React.useState(false);
 
   function generateFood(snakeBody: Coord[]): Coord {
     while (true) {
@@ -32,6 +29,19 @@ const SnakeGame = ({ onScore }: Props) => {
       if (!isOnSnake) return { x: newX, y: newY };
     }
   }
+
+  const startGame = () => {
+    setStarted(true);
+  };
+
+  const restart = () => {
+    setSnake(INITIAL_SNAKE);
+    setDirection(INITIAL_DIRECTION);
+    setFood(generateFood(INITIAL_SNAKE));
+    setIsGameOver(false);
+    setScore(0);
+    setStarted(false);
+  };
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -86,7 +96,7 @@ const SnakeGame = ({ onScore }: Props) => {
         if (hitWall || hitSelf) {
           setIsGameOver(true);
           clearInterval(intervalRef.current!);
-          if (onScore && score > 0) onScore(score);
+          if (score > 0) saveScoreIfHighest("SnakeGame", score);
           return prev;
         }
 
@@ -105,19 +115,6 @@ const SnakeGame = ({ onScore }: Props) => {
 
     return () => clearInterval(intervalRef.current!);
   }, [direction, food, started]);
-
-  const startGame = () => {
-    setStarted(true);
-  };
-
-  const restart = () => {
-    setSnake(INITIAL_SNAKE);
-    setDirection(INITIAL_DIRECTION);
-    setFood(generateFood(INITIAL_SNAKE));
-    setIsGameOver(false);
-    setScore(0);
-    setStarted(false);
-  };
 
   return (
     <div className="game-container" ref={gameRef} tabIndex={0}>
