@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 
 import useVisitorTracking from "./hooks/useVisitorTracking";
+import DashboardNavigator from "./components/DashboardNavigator/DashboardNavigator";
 import GameModal from "./components/GameModal/GameModal";
 import GameCard from "./components/GameCard/GameCard";
 import Footer from "./components/Footer/Footer";
-import DashboardNavigator from "./components/DashboardNavigator/DashboardNavigator";
 
 const GAMES = [
   {
