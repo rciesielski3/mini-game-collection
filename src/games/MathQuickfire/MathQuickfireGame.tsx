@@ -2,6 +2,7 @@ import React from "react";
 import "./MathQuickfireGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const GAME_DURATION = 30;
 
@@ -32,21 +33,12 @@ const MathQuickfireGame = () => {
     inputRef.current?.focus();
   };
 
-  React.useEffect(() => {
-    if (!gameOn) return;
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setGameOn(false);
-          if (score > 0) saveScoreIfHighest("MathQuickfireGame", score);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [gameOn]);
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("MathQuickfireGame", score, nickname);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +49,22 @@ const MathQuickfireGame = () => {
     setInput("");
     inputRef.current?.focus();
   };
+
+  React.useEffect(() => {
+    if (!gameOn) return;
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setGameOn(false);
+          handleGameOver();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [gameOn]);
 
   return (
     <div className="game-container">

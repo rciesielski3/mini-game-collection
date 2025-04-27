@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 20;
 }
 
 .modal-content {
@@ -30,8 +30,6 @@
   cursor: pointer;
 }
 
-.modal-ad {
-  margin-top: 2rem;
-  width: 100%;
-  text-align: center;
+.modal-close:hover {
+  background: #8a8c8c;
 }

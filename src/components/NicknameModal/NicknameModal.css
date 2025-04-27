@@ -1,0 +1,51 @@
+h1 {
+  font-size: 2rem;
+  color: #434084;
+  margin-bottom: 20px;
+}
+
+.nickname-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+.nickname-modal-content {
+  background: radial-gradient(circle, #b7c4ca 0%, #5c6471 100%);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: popUp 0.4s ease;
+}
+
+.nickname-input {
+  width: 80%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #434084;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  text-align: center;
+  background: #b8b5b5;
+}
+
+.nickname-submit-button {
+  margin-top: 12px;
+  padding: 16px 32px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.nickname-submit-button:hover {
+  background: #2a662c;
+}

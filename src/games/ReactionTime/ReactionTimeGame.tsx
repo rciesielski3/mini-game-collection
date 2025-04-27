@@ -2,6 +2,7 @@ import React from "react";
 import "./ReactionTimeGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const ReactionTimeGame = () => {
   const [isWaiting, setIsWaiting] = React.useState(false);
@@ -21,6 +22,13 @@ const ReactionTimeGame = () => {
     }, Math.random() * 2000 + 2000);
   };
 
+  const handleGameOver = async (time: number) => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && time > 0) {
+      await saveScoreIfHighest("ReactionTimeGame", time, nickname);
+    }
+  };
+
   const handleClick = () => {
     if (isWaiting && !isReady) {
       clearTimeout(timeoutRef.current!);
@@ -30,7 +38,7 @@ const ReactionTimeGame = () => {
       const endTime = Date.now();
       const time = endTime - startTimeRef.current;
       setReactionTime(time);
-      if (time > 0) saveScoreIfHighest("ReactionTimeGame", time);
+      handleGameOver(time);
       setIsReady(false);
       setIsWaiting(false);
     }

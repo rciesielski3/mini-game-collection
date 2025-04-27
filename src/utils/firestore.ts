@@ -13,6 +13,7 @@ export type ScoreRecord = {
   game: string;
   userId: string;
   score: number;
+  nickname: string;
   timestamp: number;
 };
 
@@ -25,7 +26,20 @@ const getUserId = () => {
   return id;
 };
 
-export const saveScoreIfHighest = async (game: string, score: number) => {
+const getNickname = () => {
+  let nickname = localStorage.getItem("anonNickname");
+  if (!nickname) {
+    nickname = prompt("Enter your nickname:") || "Anonymous";
+    localStorage.setItem("anonNickname", nickname);
+  }
+  return nickname;
+};
+
+export const saveScoreIfHighest = async (
+  game: string,
+  score: number,
+  nickname: string
+) => {
   const userId = getUserId();
   const scoresRef = collection(db, "scores");
   const q = query(
@@ -42,6 +56,7 @@ export const saveScoreIfHighest = async (game: string, score: number) => {
     await addDoc(scoresRef, {
       game,
       score,
+      nickname,
       userId,
       timestamp: serverTimestamp(),
     });
@@ -66,6 +81,7 @@ export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
         score: data.score,
         timestamp: data.timestamp?.toMillis?.() || Date.now(),
         userId: data.userId,
+        nickname: data.nickname || "Anonymous",
       };
     });
   } catch (error) {

@@ -2,6 +2,7 @@ import React from "react";
 import "./MemoryGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 type Card = {
   id: number;
@@ -50,11 +51,18 @@ const MemoryGame = () => {
     }
   };
 
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("MemoryGame", score, nickname);
+    }
+  };
+
   const resetGame = () => {
     setCards(generateCards());
     setFlipped([]);
     setMatched([]);
-    if (score > 0) saveScoreIfHighest("MemoryGame", score);
+    handleGameOver();
     setScore(0);
     isProcessing.current = false;
   };

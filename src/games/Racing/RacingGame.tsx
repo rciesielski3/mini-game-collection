@@ -2,6 +2,7 @@ import React from "react";
 import "./RacingGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const LANE_COUNT = 8;
 const GAME_HEIGHT = 300;
@@ -18,6 +19,22 @@ const RacingGame = () => {
   const [score, setScore] = React.useState(0);
   const [running, setRunning] = React.useState(false);
   const gameRef = React.useRef<HTMLDivElement | null>(null);
+
+  const startGame = () => {
+    handleGameOver();
+    setLane(1);
+    setObstacles([]);
+    setGameOver(false);
+    setScore(0);
+    setRunning(true);
+  };
+
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("RacingGame", score, nickname);
+    }
+  };
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -66,19 +83,10 @@ const RacingGame = () => {
     );
     if (collision) {
       setGameOver(true);
-      if (score > 0) saveScoreIfHighest("RacingGame", score);
+      handleGameOver();
       setRunning(false);
     }
   }, [obstacles, lane, running]);
-
-  const startGame = () => {
-    if (score > 0) saveScoreIfHighest("RacingGame", score);
-    setLane(1);
-    setObstacles([]);
-    setGameOver(false);
-    setScore(0);
-    setRunning(true);
-  };
 
   return (
     <div className="game-container">

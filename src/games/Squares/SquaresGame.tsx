@@ -2,6 +2,7 @@ import React from "react";
 import "./SquaresGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const generateRandomColor = (): string => {
   const letters = "0123456789ABCDEF";
@@ -24,6 +25,13 @@ const SquaresGame = () => {
   const [feedback, setFeedback] = React.useState("");
   const timerRef = React.useRef<number | null>(null);
 
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("SquaresGame", score, nickname);
+    }
+  };
+
   const startGame = () => {
     setScore(0);
     setTimeLeft(GAME_DURATION);
@@ -40,7 +48,7 @@ const SquaresGame = () => {
           clearInterval(timerRef.current!);
           setGameOver(true);
           setGameStarted(false);
-          if (score > 0) saveScoreIfHighest("SquaresGame", score);
+          handleGameOver();
           return 0;
         }
         return prev - 1;
@@ -64,7 +72,7 @@ const SquaresGame = () => {
   };
 
   const resetGame = () => {
-    if (score > 0) saveScoreIfHighest("SquaresGame", score);
+    handleGameOver();
     setScore(0);
     setTimeLeft(GAME_DURATION);
     setGameStarted(false);

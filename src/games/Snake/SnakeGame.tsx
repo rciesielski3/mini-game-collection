@@ -2,6 +2,7 @@ import React from "react";
 import "./SnakeGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 type Coord = { x: number; y: number };
 
@@ -32,6 +33,13 @@ const SnakeGame = () => {
 
   const startGame = () => {
     setStarted(true);
+  };
+
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("SnakeGame", score, nickname);
+    }
   };
 
   const restart = () => {
@@ -96,7 +104,7 @@ const SnakeGame = () => {
         if (hitWall || hitSelf) {
           setIsGameOver(true);
           clearInterval(intervalRef.current!);
-          if (score > 0) saveScoreIfHighest("SnakeGame", score);
+          handleGameOver();
           return prev;
         }
 

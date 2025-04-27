@@ -2,6 +2,7 @@ import React from "react";
 import "./ReactionSequenceGame.css";
 
 import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const SEQUENCE_LENGTH = 3;
 
@@ -40,6 +41,13 @@ const ReactionSequenceGame = () => {
     }
   };
 
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("ReactionSequenceGame", score, nickname);
+    }
+  };
+
   const handleBoxClick = (idx: number) => {
     if (showing || !gameOn) return;
     const nextInput = [...playerInput, idx];
@@ -48,7 +56,7 @@ const ReactionSequenceGame = () => {
     if (sequence[nextInput.length - 1] !== idx) {
       setMessage("Wrong! Try again.");
       setGameOn(false);
-      if (score > 0) saveScoreIfHighest("ReactionSequenceGame", score);
+      handleGameOver();
       return;
     }
 
