@@ -1,13 +1,12 @@
 import React from "react";
 import "./ReactionSequenceGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
+
 const SEQUENCE_LENGTH = 3;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const ReactionSequenceGame = ({ onScore }: Props) => {
+const ReactionSequenceGame = () => {
   const [sequence, setSequence] = React.useState<number[]>([]);
   const [playerInput, setPlayerInput] = React.useState<number[]>([]);
   const [showing, setShowing] = React.useState(false);
@@ -42,6 +41,13 @@ const ReactionSequenceGame = ({ onScore }: Props) => {
     }
   };
 
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("ReactionSequenceGame", score, nickname);
+    }
+  };
+
   const handleBoxClick = (idx: number) => {
     if (showing || !gameOn) return;
     const nextInput = [...playerInput, idx];
@@ -50,9 +56,7 @@ const ReactionSequenceGame = ({ onScore }: Props) => {
     if (sequence[nextInput.length - 1] !== idx) {
       setMessage("Wrong! Try again.");
       setGameOn(false);
-      if (score > 0 && onScore) {
-        onScore(score);
-      }
+      handleGameOver();
       return;
     }
 

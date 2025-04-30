@@ -1,6 +1,9 @@
 import React from "react";
 import "./MathQuickfireGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
+
 const GAME_DURATION = 30;
 
 const generateQuestion = () => {
@@ -13,11 +16,7 @@ const generateQuestion = () => {
   };
 };
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const MathQuickfireGame = ({ onScore }: Props) => {
+const MathQuickfireGame = () => {
   const [question, setQuestion] = React.useState(generateQuestion());
   const [input, setInput] = React.useState("");
   const [score, setScore] = React.useState(0);
@@ -34,23 +33,12 @@ const MathQuickfireGame = ({ onScore }: Props) => {
     inputRef.current?.focus();
   };
 
-  React.useEffect(() => {
-    if (!gameOn) return;
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setGameOn(false);
-          if (score > 0 && onScore) {
-            onScore(score);
-          }
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [gameOn]);
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("MathQuickfireGame", score, nickname);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +49,22 @@ const MathQuickfireGame = ({ onScore }: Props) => {
     setInput("");
     inputRef.current?.focus();
   };
+
+  React.useEffect(() => {
+    if (!gameOn) return;
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setGameOn(false);
+          handleGameOver();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [gameOn]);
 
   return (
     <div className="game-container">

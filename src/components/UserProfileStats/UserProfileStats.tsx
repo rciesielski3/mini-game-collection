@@ -1,10 +1,11 @@
 import React from "react";
-import { fetchScores, ScoreRecord } from "../../utils/firestore";
 import "./UserProfileStats.css";
 
-interface Props {
+import { fetchScores, ScoreRecord } from "../../utils/firestore";
+
+type Props = {
   onSelectGame?: (game: string) => void;
-}
+};
 
 const UserProfileStats: React.FC<Props> = ({ onSelectGame }) => {
   const [scores, setScores] = React.useState<ScoreRecord[]>([]);

@@ -1,13 +1,12 @@
 import React from "react";
 import "./TicTacToe.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
+
 const emptyBoard = Array(9).fill(null);
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const TicTacToe = ({ onScore }: Props) => {
+const TicTacToe = () => {
   const [board, setBoard] = React.useState<(string | null)[]>(emptyBoard);
   const [xIsNext, setXIsNext] = React.useState(true);
 
@@ -29,10 +28,19 @@ const TicTacToe = ({ onScore }: Props) => {
   };
 
   React.useEffect(() => {
-    if (winner && onScore) {
-      onScore(1);
-    } else if (isDraw && onScore) {
-      onScore(0.5);
+    const handleGameOver = async () => {
+      const nickname = await getNicknameOrPrompt();
+      if (!nickname) return;
+
+      if (winner) {
+        await saveScoreIfHighest("TicTacToeGame", 1, nickname);
+      } else if (isDraw) {
+        await saveScoreIfHighest("TicTacToeGame", 0.5, nickname);
+      }
+    };
+
+    if (winner || isDraw) {
+      handleGameOver();
     }
   }, [winner, isDraw]);
 

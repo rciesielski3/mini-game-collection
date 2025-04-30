@@ -48,7 +48,7 @@ body {
 }
 
 .game-button {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
@@ -64,14 +64,14 @@ body {
 }
 
 .restart-button {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
   margin-top: 1rem;
   background-color: #9d0202;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 

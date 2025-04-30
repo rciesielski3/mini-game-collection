@@ -25,13 +25,8 @@ const getDailyGame = (): string => {
 const DailyChallenge: React.FC<{ onPlay: (game: string) => void }> = ({
   onPlay,
 }) => {
-  const dailyGame = getDailyGame();
   const [completed, setCompleted] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    const status = localStorage.getItem(`daily-complete-${dailyGame}`);
-    setCompleted(status === "true");
-  }, [dailyGame]);
+  const dailyGame = getDailyGame();
 
   const handlePlay = () => {
     onPlay(dailyGame);
@@ -41,6 +36,11 @@ const DailyChallenge: React.FC<{ onPlay: (game: string) => void }> = ({
     localStorage.setItem(`daily-complete-${dailyGame}`, "true");
     setCompleted(true);
   };
+
+  React.useEffect(() => {
+    const status = localStorage.getItem(`daily-complete-${dailyGame}`);
+    setCompleted(status === "true");
+  }, [dailyGame]);
 
   return (
     <div className="daily-challenge">

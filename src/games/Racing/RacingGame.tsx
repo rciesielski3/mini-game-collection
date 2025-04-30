@@ -1,17 +1,16 @@
 import React from "react";
 import "./RacingGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
+
 const LANE_COUNT = 8;
 const GAME_HEIGHT = 300;
 const OBSTACLE_INTERVAL = 1500;
 const CAR_WIDTH = 40;
 const OBSTACLE_HEIGHT = 20;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const RacingGame = ({ onScore }: Props) => {
+const RacingGame = () => {
   const [lane, setLane] = React.useState(1);
   const [obstacles, setObstacles] = React.useState<
     { lane: number; y: number }[]
@@ -20,6 +19,22 @@ const RacingGame = ({ onScore }: Props) => {
   const [score, setScore] = React.useState(0);
   const [running, setRunning] = React.useState(false);
   const gameRef = React.useRef<HTMLDivElement | null>(null);
+
+  const startGame = () => {
+    handleGameOver();
+    setLane(1);
+    setObstacles([]);
+    setGameOver(false);
+    setScore(0);
+    setRunning(true);
+  };
+
+  const handleGameOver = async () => {
+    const nickname = await getNicknameOrPrompt();
+    if (nickname && score > 0) {
+      await saveScoreIfHighest("RacingGame", score, nickname);
+    }
+  };
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -68,23 +83,10 @@ const RacingGame = ({ onScore }: Props) => {
     );
     if (collision) {
       setGameOver(true);
-      if (score > 0 && onScore) {
-        onScore(score);
-      }
+      handleGameOver();
       setRunning(false);
     }
   }, [obstacles, lane, running]);
-
-  const startGame = () => {
-    if (score > 0 && onScore) {
-      onScore(score);
-    }
-    setLane(1);
-    setObstacles([]);
-    setGameOver(false);
-    setScore(0);
-    setRunning(true);
-  };
 
   return (
     <div className="game-container">

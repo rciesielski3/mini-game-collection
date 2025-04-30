@@ -2,17 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./GameModal.css";
 
-import { saveScore } from "../../utils/firestore";
-import SnakeGame from "../../games/Snake/SnakeGame";
-import DinoGame from "../../games/DinoJump/DinoGame";
-import TicTacToe from "../../games/TicTacToe/TicTacToe";
-import WhackAMole from "../../games/WhackAMole/WhackAMole";
-import ReactionTimeGame from "../../games/ReactionTime/ReactionTimeGame";
-import RacingGame from "../../games/Racing/RacingGame";
-import SquaresGame from "../../games/Squares/SquaresGame";
-import MemoryGame from "../../games/Memory/MemoryGame";
-import ReactionSequenceGame from "../../games/ReactionSequence/ReactionSequenceGame";
-import MathQuickfireGame from "../../games/MathQuickfire/MathQuickfireGame";
+import {
+  DinoGame,
+  MathQuickfireGame,
+  MemoryGame,
+  RacingGame,
+  ReactionSequenceGame,
+  ReactionTimeGame,
+  SnakeGame,
+  SquaresGame,
+  TicTacToe,
+  WhackAMole,
+} from "../../games";
 
 type Props = {
   gameName: string | null;
@@ -28,36 +29,30 @@ const GameModal = ({ gameName, onClose }: Props) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  const handleScoreSubmit = (score: number) => {
-    if (gameName) {
-      saveScore(gameName, score);
-    }
-  };
-
   if (!gameName) return null;
 
   const renderGame = () => {
     switch (gameName) {
       case "Snake":
-        return <SnakeGame onScore={handleScoreSubmit} />;
+        return <SnakeGame />;
       case "DinoJump":
-        return <DinoGame onScore={handleScoreSubmit} />;
+        return <DinoGame />;
       case "TicTacToe":
-        return <TicTacToe onScore={handleScoreSubmit} />;
+        return <TicTacToe />;
       case "WhackAMole":
-        return <WhackAMole onScore={handleScoreSubmit} />;
+        return <WhackAMole />;
       case "ReactionTimeGame":
-        return <ReactionTimeGame onScore={handleScoreSubmit} />;
+        return <ReactionTimeGame />;
       case "RacingGame":
-        return <RacingGame onScore={handleScoreSubmit} />;
+        return <RacingGame />;
       case "SquaresGame":
-        return <SquaresGame onScore={handleScoreSubmit} />;
+        return <SquaresGame />;
       case "MemoryGame":
-        return <MemoryGame onScore={handleScoreSubmit} />;
+        return <MemoryGame />;
       case "ReactionSequenceGame":
-        return <ReactionSequenceGame onScore={handleScoreSubmit} />;
+        return <ReactionSequenceGame />;
       case "MathQuickfireGame":
-        return <MathQuickfireGame onScore={handleScoreSubmit} />;
+        return <MathQuickfireGame />;
       default:
         return null;
     }

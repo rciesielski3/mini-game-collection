@@ -1,16 +1,15 @@
 import React from "react";
 import "./DinoGame.css";
 
+import { saveScoreIfHighest } from "../../utils/firestore";
+import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
+
 const GAME_HEIGHT = 250;
 const GRAVITY = 0.3;
 const JUMP_VELOCITY = 10;
 const GROUND_Y = 0;
 
-type Props = {
-  onScore?: (score: number) => void;
-};
-
-const DinoGame = ({ onScore }: Props) => {
+const DinoGame = () => {
   const [y, setY] = React.useState(GROUND_Y);
   const [velocity, setVelocity] = React.useState(0);
   const [isJumping, setIsJumping] = React.useState(false);
@@ -96,14 +95,19 @@ const DinoGame = ({ onScore }: Props) => {
   }, [gameOver, difficulty, score]);
 
   React.useEffect(() => {
+    const handleGameOver = async () => {
+      const nickname = await getNicknameOrPrompt();
+      if (nickname && score > 0) {
+        await saveScoreIfHighest("DinoJump", score, nickname);
+      }
+    };
+
     const hit = obstacles.some((o) => o.x < 70 && o.x > 40 && y <= 35);
     if (hit) {
       setGameOver(true);
-      if (score > 0 && onScore) {
-        onScore(score);
-      }
+      handleGameOver();
     }
-  }, [obstacles, y]);
+  }, [obstacles, y, score]);
 
   const restart = () => {
     setY(GROUND_Y);
