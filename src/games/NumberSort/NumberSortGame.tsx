@@ -4,8 +4,13 @@ import "./NumberSortGame.css";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 import { saveScoreIfHighest } from "../../utils/firestore";
 
-const generateNumbers = () =>
-  Array.from({ length: 6 }, () => Math.floor(Math.random() * 90 + 10));
+const generateNumbers = () => {
+  const uniqueSet = new Set<number>();
+  while (uniqueSet.size < 6) {
+    uniqueSet.add(Math.floor(Math.random() * 90 + 10));
+  }
+  return Array.from(uniqueSet);
+};
 
 const NumberSortGame = () => {
   const [numbers, setNumbers] = React.useState<number[]>([]);
@@ -50,7 +55,8 @@ const NumberSortGame = () => {
 
         const nickname = await getNicknameOrPrompt();
         if (nickname) {
-          await saveScoreIfHighest("NumberSortGame", finalTime, nickname);
+          const timeInSeconds = parseFloat((finalTime / 1000).toFixed(3));
+          await saveScoreIfHighest("NumberSortGame", timeInSeconds, nickname);
         }
       } else {
         setTargetIndex((i) => i + 1);
