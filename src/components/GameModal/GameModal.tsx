@@ -7,6 +7,7 @@ import {
   MathQuickfireGame,
   MemoryGame,
   NumberSortGame,
+  OddOneOutGame,
   RacingGame,
   ReactionSequenceGame,
   ReactionTimeGame,
@@ -56,6 +57,8 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <MathQuickfireGame />;
       case "NumberSortGame":
         return <NumberSortGame />;
+      case "OddOneOutGame":
+        return <OddOneOutGame />;
       default:
         return null;
     }
