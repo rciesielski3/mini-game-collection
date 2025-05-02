@@ -65,6 +65,19 @@ const GAMES = [
     description: "Solve math problems as fast as you can!",
     component: "MathQuickfireGame",
   },
+  {
+    emoji: "🔢",
+    title: "Number Sort",
+    description:
+      "Quickly sort numbers in the correct order before time runs out!",
+    component: "NumberSortGame",
+  },
+  {
+    emoji: "➖",
+    title: "Odd One Out",
+    description: "Spot the item that doesn't belong as fast as you can!",
+    component: "OddOneOutGame",
+  },
 ];
 
 const App = () => {

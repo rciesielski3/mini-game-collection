@@ -1,0 +1,27 @@
+.number-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+}
+
+.number-tile {
+  background: var(--card-color, #f0f8ff);
+  color: var(--text-color, #1a1a1a);
+  font-size: 24px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.number-tile.correct {
+  background-color: #2ecc71 !important;
+  border: 2px solid #27ae60;
+  color: white;
+}
+
+.number-tile.wrong {
+  background-color: #e74c3c !important;
+  color: white;
+}
