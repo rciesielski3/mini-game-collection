@@ -25,7 +25,8 @@ const ReactionTimeGame = () => {
   const handleGameOver = async (time: number) => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && time > 0) {
-      await saveScoreIfHighest("ReactionTimeGame", time, nickname);
+      const timeInSeconds = parseFloat((time / 1000).toFixed(3));
+      await saveScoreIfHighest("ReactionTimeGame", timeInSeconds, nickname);
     }
   };
 

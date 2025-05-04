@@ -9,6 +9,8 @@ import {
   where,
 } from "firebase/firestore";
 
+import { isTimeBasedGame } from "./scoreConfig";
+
 export type ScoreRecord = {
   game: string;
   userId: string;
@@ -26,15 +28,6 @@ const getUserId = () => {
   return id;
 };
 
-const getNickname = () => {
-  let nickname = localStorage.getItem("anonNickname");
-  if (!nickname) {
-    nickname = prompt("Enter your nickname:") || "Anonymous";
-    localStorage.setItem("anonNickname", nickname);
-  }
-  return nickname;
-};
-
 export const saveScoreIfHighest = async (
   game: string,
   score: number,
@@ -42,23 +35,30 @@ export const saveScoreIfHighest = async (
 ) => {
   const userId = getUserId();
   const scoresRef = collection(db, "scores");
+
+  const isTimeBased = isTimeBasedGame(game);
+
   const q = query(
     scoresRef,
     where("game", "==", game),
     where("userId", "==", userId),
-    orderBy("score", "desc")
+    orderBy("score", isTimeBased ? "asc" : "desc")
   );
 
   const snapshot = await getDocs(q);
-  const best = snapshot.docs[0]?.data()?.score || 0;
+  const best = snapshot.docs[0]?.data()?.score;
 
-  if (score > best) {
+  const isNewBest =
+    best === undefined || (isTimeBased ? score < best : score > best);
+
+  if (isNewBest) {
     await addDoc(scoresRef, {
       game,
       score,
       nickname,
       userId,
       timestamp: serverTimestamp(),
+      ...(isTimeBased && { timeInSeconds: score }),
     });
   }
 };
@@ -70,7 +70,10 @@ export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
       q = query(
         collection(db, "scores"),
         where("game", "==", game),
-        orderBy("score", "desc")
+        orderBy(
+          "score",
+          ["NumberSortGame", "ReactionTimeGame"].includes(game) ? "asc" : "desc"
+        )
       );
     }
     const snapshot = await getDocs(q);
@@ -82,6 +85,7 @@ export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
         timestamp: data.timestamp?.toMillis?.() || Date.now(),
         userId: data.userId,
         nickname: data.nickname || "Anonymous",
+        timeInSeconds: data.timeInSeconds,
       };
     });
   } catch (error) {
