@@ -1,13 +1,12 @@
 import React from "react";
 import "./Leaderboard.css";
-
 import { fetchScores, ScoreRecord } from "../../utils/firestore";
+import { isTimeBasedGame } from "../../utils/scoreConfig";
 
 const Leaderboard = () => {
   const [scores, setScores] = React.useState<ScoreRecord[]>([]);
   const [loading, setLoading] = React.useState(true);
-
-  const timeBasedGames = ["NumberSortGame", "ReactionTimeGame"];
+  const [gameIndex, setGameIndex] = React.useState(0);
 
   React.useEffect(() => {
     fetchScores().then((data) => {
@@ -16,46 +15,61 @@ const Leaderboard = () => {
     });
   }, []);
 
+  const uniqueGameSet = new Set<string>();
+  scores.forEach((s) => uniqueGameSet.add(s.game));
+  const games = Array.from(uniqueGameSet);
+  const selectedGame = games[gameIndex] || "";
+
+  const handlePrev = () => {
+    setGameIndex((prev) => (prev - 1 + games.length) % games.length);
+  };
+
+  const handleNext = () => {
+    setGameIndex((prev) => (prev + 1) % games.length);
+  };
+
+  const filteredScores = scores
+    .filter((s) => s.game === selectedGame)
+    .sort((a, b) =>
+      isTimeBasedGame(selectedGame) ? a.score - b.score : b.score - a.score
+    )
+    .slice(0, 5);
+
   return (
     <div className="leaderboard-container">
       <h3 className="leaderboard-title">🏆 Leaderboard</h3>
+      {games.length > 1 && (
+        <div className="leaderboard-switcher">
+          <button onClick={handlePrev} className="game-button">
+            ←
+          </button>
+          <span className="game-title">{selectedGame.replace("Game", "")}</span>
+          <button onClick={handleNext} className="game-button">
+            →
+          </button>
+        </div>
+      )}
+
       {loading ? (
         <p className="leaderboard-loading">Loading...</p>
-      ) : scores.length === 0 ? (
+      ) : filteredScores.length === 0 ? (
         <p className="leaderboard-empty">No scores yet.</p>
       ) : (
         <ul className="leaderboard-list">
-          {scores
-            .sort((a, b) => {
-              const aIsTime = timeBasedGames.includes(a.game);
-              const bIsTime = timeBasedGames.includes(b.game);
+          {filteredScores.map((score, index) => {
+            const display = isTimeBasedGame(score.game)
+              ? `${score.score.toFixed(3)}s`
+              : `${score.score} pts`;
 
-              if (aIsTime && bIsTime) return a.score - b.score;
-              if (!aIsTime && !bIsTime) return b.score - a.score;
-
-              return aIsTime ? -1 : 1;
-            })
-            .slice(0, 5)
-            .map((score, index) => {
-              const isTimeBased = timeBasedGames.includes(score.game);
-              const display = isTimeBased
-                ? `${score.score.toFixed(3)}s`
-                : `${score.score} pts`;
-
-              return (
-                <li key={index} className="leaderboard-entry">
-                  <span className="rank">{index + 1}. </span>
-                  <span className="leaderboard-nickname">
-                    {score.nickname}
-                  </span>{" "}
-                  -
-                  <span className="leaderboard-details">
-                    {" "}
-                    {score.game} • {display}
-                  </span>
-                </li>
-              );
-            })}
+            return (
+              <li key={index} className="leaderboard-entry">
+                <span className="rank">{index + 1}. </span>
+                <span className="leaderboard-nickname">
+                  {score.nickname}
+                </span> - <span className="leaderboard-details">{display}</span>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
