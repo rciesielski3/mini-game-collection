@@ -1,7 +1,7 @@
 export const TIME_BASED_GAMES = [
   "NumberSortGame",
   "ReactionTimeGame",
-  "MemoryGame",
+  "OddOneOutGame",
 ];
 
 export const isTimeBasedGame = (game: string): boolean =>
