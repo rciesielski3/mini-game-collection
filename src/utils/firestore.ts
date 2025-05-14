@@ -63,10 +63,24 @@ export const saveScoreIfHighest = async (
   }
 };
 
-export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
+export const fetchScores = async (
+  game?: string,
+  userId?: string
+): Promise<ScoreRecord[]> => {
   try {
     let q = query(collection(db, "scores"), orderBy("timestamp", "desc"));
-    if (game) {
+
+    if (game && userId) {
+      q = query(
+        collection(db, "scores"),
+        where("game", "==", game),
+        where("userId", "==", userId),
+        orderBy(
+          "score",
+          ["NumberSortGame", "ReactionTimeGame"].includes(game) ? "asc" : "desc"
+        )
+      );
+    } else if (game) {
       q = query(
         collection(db, "scores"),
         where("game", "==", game),
@@ -75,19 +89,27 @@ export const fetchScores = async (game?: string): Promise<ScoreRecord[]> => {
           ["NumberSortGame", "ReactionTimeGame"].includes(game) ? "asc" : "desc"
         )
       );
+    } else if (userId) {
+      q = query(
+        collection(db, "scores"),
+        where("userId", "==", userId),
+        orderBy("timestamp", "desc")
+      );
     }
+
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        game: data.game,
-        score: data.score,
-        timestamp: data.timestamp?.toMillis?.() || Date.now(),
-        userId: data.userId,
-        nickname: data.nickname || "Anonymous",
-        timeInSeconds: data.timeInSeconds,
-      };
-    });
+    return snapshot.docs
+      .map((doc) => {
+        const data = doc.data();
+        return {
+          game: data.game,
+          score: data.score,
+          timestamp: data.timestamp?.toMillis?.() || Date.now(),
+          userId: data.userId,
+          nickname: data.nickname || "Anonymous",
+        };
+      })
+      .filter((r) => r.nickname !== "Anonymous");
   } catch (error) {
     console.error("Error fetching scores:", error);
     return [];
