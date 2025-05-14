@@ -5,13 +5,17 @@ import { updateVisitorCount } from "../../utils/metrics";
 import DailyChallenge from "../DailyChallenge/DailyChallenge";
 import UserProfileStats from "../UserProfileStats/UserProfileStats";
 import Leaderboard from "../Leaderboard/Leaderboard";
+import ProgressTracker from "../ProgressTracker/ProgressTracker";
+import GameAchievements from "../GameAchievements/GameAchievements";
 
 const DashboardNavigator = ({
   onSelectGame,
 }: {
   onSelectGame: (game: string) => void;
 }) => {
-  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [expandedDashboard, setExpandedDashboard] =
+    React.useState<boolean>(false);
+  const [expandedUser, setExpandedUser] = React.useState<boolean>(false);
   const [visitors, setVisitors] = React.useState<number | null>(null);
 
   const handleBuyCoffee = () => {
@@ -27,16 +31,28 @@ const DashboardNavigator = ({
       <div className="dashboard-header-row">
         <div
           className="dashboard-toggle"
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => setExpandedDashboard(!expandedDashboard)}
         >
-          {expanded ? "📂 Hide dashboard" : "📁 Show dashboard"}
+          {expandedDashboard ? "📂 Hide dashboard" : "📁 Show dashboard"}
+        </div>
+        <div
+          className="dashboard-toggle"
+          onClick={() => setExpandedUser(!expandedUser)}
+        >
+          {expandedUser ? "📂 Hide User stats" : "📁 Show User stats"}
         </div>
         <div className="dashboard-toggle" onClick={handleBuyCoffee}>
           ☕ Buy Me a Coffee
         </div>
         <div className="visitor-button">👥 Visitors: {visitors}</div>
       </div>
-      {expanded && (
+      {expandedUser && (
+        <div className="dashboard-content">
+          <ProgressTracker />
+          <GameAchievements />
+        </div>
+      )}
+      {expandedDashboard && (
         <div className="dashboard-content">
           <DailyChallenge onPlay={onSelectGame} />
           <UserProfileStats />
