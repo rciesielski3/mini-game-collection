@@ -64,13 +64,21 @@ const ProgressTracker = () => {
     <div className="profile-stats dashboard-section">
       <h3 className="profile-title">📊 Your Progress</h3>
       <div className="profile-section">
-        <p>Total games played: {gamesPlayed}</p>
-        <p>Longest streak: {streak} days</p>
         <p>
-          Best Reaction Time:{" "}
-          {bestReaction !== null ? `${bestReaction.toFixed(3)}s` : "–"}
+          ▶️ Total games played: <strong>{gamesPlayed}</strong>
         </p>
-        <p>Most Played: {mostPlayed || "–"}</p>
+        <p>
+          ▶️ Longest streak: <strong>{streak} days</strong>
+        </p>
+        <p>
+          ▶️ Best Reaction Time:{" "}
+          <strong>
+            {bestReaction !== null ? `${bestReaction.toFixed(3)}s` : "–"}
+          </strong>
+        </p>
+        <p>
+          ▶️ Most Played: <strong>{mostPlayed || "–"}</strong>
+        </p>
       </div>
     </div>
   );

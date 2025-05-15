@@ -41,7 +41,7 @@ const UserProfileStats: React.FC<Props> = ({ onSelectGame }) => {
       {lastPlayed && (
         <div className="profile-section">
           <strong>Last Played:</strong>
-          <p>{lastPlayed}</p>
+          <p>🎮 {lastPlayed}</p>
         </div>
       )}
     </div>

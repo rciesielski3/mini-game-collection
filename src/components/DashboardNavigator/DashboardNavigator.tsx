@@ -42,7 +42,7 @@ const DashboardNavigator = ({
             : "📁 Show dashboard"}
         </div>
         <div className="dashboard-toggle" onClick={() => toggleSection("user")}>
-          {expandedSection === "user" ? "🔽 User stats" : "▶️ User stats"}
+          {expandedSection === "user" ? "🔽 User stats" : "🚀 User stats"}
         </div>
         <div className="dashboard-toggle" onClick={handleBuyCoffee}>
           ☕ Buy Me a Coffee
