@@ -61,7 +61,7 @@ const ProgressTracker = () => {
   }, [userId]);
 
   return (
-    <div className="profile-stats dashboard-section">
+    <div className="profile-stats">
       <h3 className="profile-title">📊 Your Progress</h3>
       <div className="profile-section">
         <p>
