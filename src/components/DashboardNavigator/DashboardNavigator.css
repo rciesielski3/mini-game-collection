@@ -12,6 +12,11 @@
   width: fit-content;
   border: 1px solid #1d5067;
   box-shadow: 0 5px 10px rgba(124, 124, 124, 0.677);
+  text-shadow: 1px 2px 4px #333;
+}
+
+.dashboard-toggle:hover {
+  color: #ffdd57;
 }
 
 .dashboard-content {
@@ -47,5 +52,6 @@
   width: fit-content;
   border: 1px solid #1d5067;
   box-shadow: 0 5px 10px rgba(124, 124, 124, 0.677);
+  text-shadow: 1px 2px 4px #333;
   cursor: not-allowed;
 }
