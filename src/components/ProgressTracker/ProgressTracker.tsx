@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProgressTracker.css";
+import "./../UserProfileStats/UserProfileStats.css";
 
 import { fetchScores } from "../../utils/firestore";
 

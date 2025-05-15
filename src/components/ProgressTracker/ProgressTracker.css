@@ -1,5 +1,5 @@
-.profile-stats {
-  background: radial-gradient(circle, #1d5067 0%, #bbbcbe 100%);
+.progress-stats {
+  background: radial-gradient(circle, #1d5067 30%, #bbbcbe 100%);
   border-radius: 12px;
   border: 1px solid #434e74;
   margin: 1rem auto;
@@ -10,18 +10,18 @@
   backdrop-filter: blur(6px);
 }
 
-.profile-title {
+.progress-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffdd57;
   text-shadow: 1px 1px 2px #333;
 }
 
-.profile-section {
+.progress-section {
   margin-bottom: 0.5rem;
 }
 
-.profile-section strong {
+.progress-section strong {
   color: #d0cbff;
   font-weight: 600;
 }

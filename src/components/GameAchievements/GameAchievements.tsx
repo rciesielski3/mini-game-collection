@@ -1,5 +1,5 @@
 import React from "react";
-import "./GameAchievements.css";
+import "./../UserProfileStats/UserProfileStats.css";
 
 import { fetchScores } from "../../utils/firestore";
 import { saveUserAchievements } from "../../utils/storeAchievements";

@@ -1,12 +1,12 @@
 .profile-stats {
-  background: radial-gradient(circle, #1d5067 0%, #bbbcbe 100%);
+  background: radial-gradient(circle, #1d5067 30%, #bbbcbe 100%);
   border-radius: 12px;
   border: 1px solid #434e74;
   margin: 1rem auto;
   color: #f0f0f0;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
 }
 
