@@ -13,7 +13,6 @@
 .profile-title {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 1rem;
   color: #ffdd57;
   text-shadow: 1px 1px 2px #333;
 }
@@ -25,22 +24,4 @@
 .profile-section strong {
   color: #d0cbff;
   font-weight: 600;
-}
-
-.profile-section ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0.5rem;
-}
-
-.profile-section li {
-  padding: 0.4rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  list-style: none;
-}
-
-.profile-section li:hover {
-  color: #8ef5ff;
-  text-decoration: underline;
 }

@@ -31,8 +31,8 @@ const GameAchievements = () => {
 
       const newAchievements = {
         snake10: hasSnake10,
-        played3Days: gameDays.size >= 3,
         racingWins: racingHigh,
+        played3Days: gameDays.size >= 20,
         allGames: distinctGames.size >= 10,
       };
 
@@ -42,18 +42,26 @@ const GameAchievements = () => {
   }, [userId]);
 
   return (
-    <div className="profile-stats dashboard-section">
+    <div className="profile-stats">
       <h3 className="profile-title">🏅 Achievements</h3>
-      <ul className="profile-section">
-        <li>{achievements.snake10 ? "✅" : "🔒"} Scored 10+ in Snake</li>
-        <li>
-          {achievements.played3Days ? "✅" : "🔒"} Played on 3 different days
-        </li>
-        <li>
-          {achievements.racingWins ? "✅" : "🔒"} Earned 3+ in Racing Game
-        </li>
-        <li>{achievements.allGames ? "✅" : "🔒"} Played all 10 games</li>
-      </ul>
+      <div className="profile-section">
+        <p>
+          {achievements.snake10 ? "✅" : "🔒"} Scored <strong>10+</strong> in
+          Snake
+        </p>
+        <p>
+          {achievements.racingWins ? "✅" : "🔒"} Earned <strong>20+</strong> in
+          Racing Game
+        </p>
+        <p>
+          {achievements.played3Days ? "✅" : "🔒"} Played on <strong>3</strong>{" "}
+          different days
+        </p>
+        <p>
+          {achievements.allGames ? "✅" : "🔒"} Played all <strong>10</strong>{" "}
+          games
+        </p>
+      </div>
     </div>
   );
 };
