@@ -1,0 +1,39 @@
+.color-grid-pattern {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  grid-template-rows: repeat(2, 100px);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-button {
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 12px;
+  opacity: 0.7;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  cursor: pointer;
+}
+
+.color-button.active {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.red {
+  background-color: #e74c3c;
+}
+
+.green {
+  background-color: #2ecc71;
+}
+
+.blue {
+  background-color: #3498db;
+}
+
+.yellow {
+  background-color: #f1c40f;
+}
