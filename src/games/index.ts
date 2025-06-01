@@ -7,11 +7,12 @@ import ReactionTimeGame from "./ReactionTime/ReactionTimeGame";
 import RacingGame from "./Racing/RacingGame";
 import ReactionSequenceGame from "./ReactionSequence/ReactionSequenceGame";
 import SnakeGame from "./Snake/SnakeGame";
-import SquaresGame from "./Squares/SquaresGame";
+import ColorMatchGame from "./ColorMatch/ColorMatchGame";
 import TicTacToe from "./TicTacToe/TicTacToe";
 import WhackAMole from "./WhackAMole/WhackAMole";
 
 export {
+  ColorMatchGame,
   DinoGame,
   MathQuickfireGame,
   MemoryGame,
@@ -21,7 +22,6 @@ export {
   RacingGame,
   ReactionSequenceGame,
   SnakeGame,
-  SquaresGame,
   TicTacToe,
   WhackAMole,
 };

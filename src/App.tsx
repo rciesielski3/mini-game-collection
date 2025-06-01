@@ -6,10 +6,10 @@ import useVisitorTracking from "./hooks/useVisitorTracking";
 
 const GAMES = [
   {
-    emoji: "🐍",
-    title: "Snake",
-    description: "Classic snake game with a twist.",
-    component: "Snake",
+    emoji: "🎨",
+    title: "Color Match",
+    description: "Match the color block with the target color.",
+    component: "ColorMatchGame",
   },
   {
     emoji: "🦖",
@@ -18,52 +18,16 @@ const GAMES = [
     component: "DinoJump",
   },
   {
-    emoji: "❌ 🔵",
-    title: "Tic-Tac-Toe",
-    description: "The timeless 2-player strategy game.",
-    component: "TicTacToe",
-  },
-  {
-    emoji: "🔨",
-    title: "Whack a Mole",
-    description: "Tap moles as they appear before time runs out.",
-    component: "WhackAMole",
-  },
-  {
-    emoji: "⚡",
-    title: "Reaction Time",
-    description: "Test how fast your reflexes are!",
-    component: "ReactionTimeGame",
-  },
-  {
-    emoji: "🏎️",
-    title: "Racing Game",
-    description: "Dodge the obstacles and race for high score!",
-    component: "RacingGame",
-  },
-  {
-    emoji: "🎨",
-    title: "Color Match",
-    description: "Match the color block with the target color.",
-    component: "SquaresGame",
+    emoji: "🧮",
+    title: "Math Quickfire",
+    description: "Solve math problems as fast as you can!",
+    component: "MathQuickfireGame",
   },
   {
     emoji: "🧠",
     title: "Memory Game",
     description: "Flip and match all cards as fast as you can!",
     component: "MemoryGame",
-  },
-  {
-    emoji: "⏱️",
-    title: "Reaction Sequence",
-    description: "Remembers sequences (like Simon Says) and repeat them.",
-    component: "ReactionSequenceGame",
-  },
-  {
-    emoji: "🧮",
-    title: "Math Quickfire",
-    description: "Solve math problems as fast as you can!",
-    component: "MathQuickfireGame",
   },
   {
     emoji: "🔢",
@@ -77,6 +41,42 @@ const GAMES = [
     title: "Odd One Out",
     description: "Spot the item that doesn't belong as fast as you can!",
     component: "OddOneOutGame",
+  },
+  {
+    emoji: "🏎️",
+    title: "Racing Game",
+    description: "Dodge the obstacles and race for high score!",
+    component: "RacingGame",
+  },
+  {
+    emoji: "⏱️",
+    title: "Reaction Sequence",
+    description: "Remembers sequences (like Simon Says) and repeat them.",
+    component: "ReactionSequenceGame",
+  },
+  {
+    emoji: "⚡",
+    title: "Reaction Time",
+    description: "Test how fast your reflexes are!",
+    component: "ReactionTimeGame",
+  },
+  {
+    emoji: "🐍",
+    title: "Snake",
+    description: "Classic snake game with a twist.",
+    component: "Snake",
+  },
+  {
+    emoji: "❌ 🔵",
+    title: "Tic-Tac-Toe",
+    description: "The timeless 2-player strategy game.",
+    component: "TicTacToe",
+  },
+  {
+    emoji: "🔨",
+    title: "Whack a Mole",
+    description: "Tap moles as they appear before time runs out.",
+    component: "WhackAMole",
   },
 ];
 

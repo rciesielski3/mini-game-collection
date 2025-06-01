@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import "./GameModal.css";
 
 import {
+  ColorMatchGame,
   DinoGame,
   MathQuickfireGame,
   MemoryGame,
@@ -12,7 +14,6 @@ import {
   ReactionSequenceGame,
   ReactionTimeGame,
   SnakeGame,
-  SquaresGame,
   TicTacToe,
   WhackAMole,
 } from "../../games";
@@ -35,30 +36,30 @@ const GameModal = ({ gameName, onClose }: Props) => {
 
   const renderGame = () => {
     switch (gameName) {
-      case "Snake":
-        return <SnakeGame />;
+      case "ColorMatchGame":
+        return <ColorMatchGame />;
       case "DinoJump":
         return <DinoGame />;
-      case "TicTacToe":
-        return <TicTacToe />;
-      case "WhackAMole":
-        return <WhackAMole />;
-      case "ReactionTimeGame":
-        return <ReactionTimeGame />;
-      case "RacingGame":
-        return <RacingGame />;
-      case "SquaresGame":
-        return <SquaresGame />;
-      case "MemoryGame":
-        return <MemoryGame />;
-      case "ReactionSequenceGame":
-        return <ReactionSequenceGame />;
       case "MathQuickfireGame":
         return <MathQuickfireGame />;
+      case "MemoryGame":
+        return <MemoryGame />;
       case "NumberSortGame":
         return <NumberSortGame />;
       case "OddOneOutGame":
         return <OddOneOutGame />;
+      case "RacingGame":
+        return <RacingGame />;
+      case "ReactionSequenceGame":
+        return <ReactionSequenceGame />;
+      case "ReactionTimeGame":
+        return <ReactionTimeGame />;
+      case "Snake":
+        return <SnakeGame />;
+      case "TicTacToe":
+        return <TicTacToe />;
+      case "WhackAMole":
+        return <WhackAMole />;
       default:
         return null;
     }
