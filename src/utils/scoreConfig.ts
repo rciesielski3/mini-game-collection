@@ -1,4 +1,5 @@
 export const TIME_BASED_GAMES = [
+  "NumberChaseGame",
   "NumberSortGame",
   "ReactionTimeGame",
   "OddOneOutGame",

@@ -77,7 +77,11 @@ export const fetchScores = async (
         where("userId", "==", userId),
         orderBy(
           "score",
-          ["NumberSortGame", "ReactionTimeGame"].includes(game) ? "asc" : "desc"
+          ["NumberSortGame", "ReactionTimeGame", "NumberChaseGame"].includes(
+            game
+          )
+            ? "asc"
+            : "desc"
         )
       );
     } else if (game) {
@@ -86,7 +90,11 @@ export const fetchScores = async (
         where("game", "==", game),
         orderBy(
           "score",
-          ["NumberSortGame", "ReactionTimeGame"].includes(game) ? "asc" : "desc"
+          ["NumberSortGame", "ReactionTimeGame", "NumberChaseGame"].includes(
+            game
+          )
+            ? "asc"
+            : "desc"
         )
       );
     } else if (userId) {
