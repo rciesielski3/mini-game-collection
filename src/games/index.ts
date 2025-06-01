@@ -3,6 +3,7 @@ import MathQuickfireGame from "./MathQuickfire/MathQuickfireGame";
 import MemoryGame from "./Memory/MemoryGame";
 import NumberSortGame from "./NumberSort/NumberSortGame";
 import OddOneOutGame from "./OddOneOut/OddOneOutGame";
+import PatternMemoryGame from "./PatternMemory/PatternMemoryGame";
 import ReactionTimeGame from "./ReactionTime/ReactionTimeGame";
 import RacingGame from "./Racing/RacingGame";
 import ReactionSequenceGame from "./ReactionSequence/ReactionSequenceGame";
@@ -17,6 +18,7 @@ export {
   MemoryGame,
   NumberSortGame,
   OddOneOutGame,
+  PatternMemoryGame,
   ReactionTimeGame,
   RacingGame,
   ReactionSequenceGame,
