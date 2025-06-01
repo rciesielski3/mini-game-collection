@@ -1,0 +1,32 @@
+.grid-5x5 {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.grid-tile {
+  width: 60px;
+  height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #b1afaf;
+  box-shadow: 5px 5px 5px #7e716d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.grid-tile:hover {
+  background-color: #4caf50;
+  scale: 1.1;
+}
+
+.grid-tile.disabled {
+  background-color: #285d29;
+  cursor: default;
+  scale: 1;
+}

@@ -2,6 +2,7 @@ import DinoGame from "./DinoJump/DinoGame";
 import MathQuickfireGame from "./MathQuickfire/MathQuickfireGame";
 import MemoryGame from "./Memory/MemoryGame";
 import NumberSortGame from "./NumberSort/NumberSortGame";
+import NumberChaseGame from "./NumberChase/NumberChaseGame";
 import OddOneOutGame from "./OddOneOut/OddOneOutGame";
 import ReactionTimeGame from "./ReactionTime/ReactionTimeGame";
 import RacingGame from "./Racing/RacingGame";
@@ -16,6 +17,7 @@ export {
   MathQuickfireGame,
   MemoryGame,
   NumberSortGame,
+  NumberChaseGame,
   OddOneOutGame,
   ReactionTimeGame,
   RacingGame,

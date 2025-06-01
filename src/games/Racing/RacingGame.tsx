@@ -96,7 +96,7 @@ const RacingGame = () => {
 
       <div
         ref={gameRef}
-        className="racing-road"
+        className="game-background"
         style={{
           width: `${LANE_COUNT * CAR_WIDTH}px`,
           height: `${GAME_HEIGHT}px`,

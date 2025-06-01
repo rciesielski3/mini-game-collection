@@ -11,6 +11,7 @@
   width: 80px;
   height: 80px;
   background-color: #cbc8c7;
+  box-shadow: 5px 5px 5px #7e716d;
   color: white;
   font-size: 2rem;
   display: flex;
