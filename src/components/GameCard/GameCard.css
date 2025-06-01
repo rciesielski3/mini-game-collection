@@ -4,7 +4,7 @@
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  box-shadow: 0 5px 10px rgba(124, 124, 124, 0.677);
+  box-shadow: 5px 5px 5px #525151;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   display: flex;
@@ -13,8 +13,9 @@
 }
 
 .game-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 5px #525151;
+  scale: 1.03;
 }
 
 .game-emoji {

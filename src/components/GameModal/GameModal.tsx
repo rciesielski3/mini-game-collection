@@ -69,7 +69,7 @@ const GameModal = ({ gameName, onClose }: Props) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <button className="modal-close" onClick={onClose}>
-          ❌
+          ✘
         </button>
         {renderGame()}
       </div>

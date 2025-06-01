@@ -21,15 +21,18 @@
 }
 
 .modal-close {
-  background: #91989c;
+  background: linear-gradient(195deg, #aaacaf, #3e3f40);
+  box-shadow: 5px 5px 5px #525151;
   padding: 0.8rem 1rem;
   border-radius: 8px;
+  font-size: 18px;
   position: absolute;
   right: 10px;
   top: 10px;
   cursor: pointer;
+  border: none;
 }
 
 .modal-close:hover {
-  background: #8a8c8c;
+  scale: 1.05;
 }
