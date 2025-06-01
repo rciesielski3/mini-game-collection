@@ -35,7 +35,7 @@ const NumberChaseGame = () => {
       const nickname = await getNicknameOrPrompt();
       if (nickname) {
         const seconds = parseFloat((time / 1000).toFixed(3));
-        await saveScoreIfHighest("NumberChaseGame", -seconds, nickname);
+        await saveScoreIfHighest("NumberChaseGame", seconds, nickname);
       }
     } else {
       setNextNumber(nextNumber + 1);
