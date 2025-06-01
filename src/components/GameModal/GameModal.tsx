@@ -16,6 +16,7 @@ import {
   TicTacToe,
   WhackAMole,
 } from "../../games";
+import NumberChaseGame from "../../games/NumberChase/NumberChaseGame";
 
 type Props = {
   gameName: string | null;
@@ -59,6 +60,8 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <NumberSortGame />;
       case "OddOneOutGame":
         return <OddOneOutGame />;
+      case "NumberChaseGame":
+        return <NumberChaseGame />;
       default:
         return null;
     }

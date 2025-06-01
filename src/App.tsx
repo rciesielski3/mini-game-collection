@@ -78,6 +78,12 @@ const GAMES = [
     description: "Spot the item that doesn't belong as fast as you can!",
     component: "OddOneOutGame",
   },
+  {
+    emoji: "🪿",
+    title: "Number Chase",
+    description: "Tap numbers 1–25 in order as fast as possible!",
+    component: "NumberChaseGame",
+  },
 ];
 
 const App = () => {
