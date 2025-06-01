@@ -4,7 +4,7 @@
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  box-shadow: 5px 5px 5px #525151;
+  box-shadow: 10px 10px 10px #525151;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   display: flex;
@@ -14,7 +14,7 @@
 
 .game-card:hover {
   transform: translateY(-2px);
-  box-shadow: 5px 5px 5px #525151;
+  box-shadow: 10px 10px 10px #525151;
   scale: 1.03;
 }
 
