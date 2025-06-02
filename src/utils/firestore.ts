@@ -28,7 +28,7 @@ const getOrCreateUserId = (): string => {
   return id;
 };
 
-export const saveScoreIfHighest = async (
+export const saveScore = async (
   game: string,
   score: number,
   nickname: string

@@ -3,7 +3,7 @@ import "./OddOneOutGame.css";
 
 import { useTriviaQuestions } from "../../hooks/useTriviaQuestions";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 
 const OddOneOutGame = () => {
   const { questions, loading, error } = useTriviaQuestions(5);
@@ -53,7 +53,7 @@ const OddOneOutGame = () => {
         if (score === questions.length - 1) {
           const nickname = await getNicknameOrPrompt();
           if (nickname) {
-            await saveScoreIfHighest("OddOneOutGame", seconds, nickname);
+            await saveScore("OddOneOutGame", seconds, nickname);
           }
         }
       }

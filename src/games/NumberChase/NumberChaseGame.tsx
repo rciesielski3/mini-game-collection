@@ -2,7 +2,7 @@ import React from "react";
 import "./NumberChaseGame.css";
 
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 
 const generateNumbers = () => {
   return [...Array(25)].map((_, i) => i + 1).sort(() => Math.random() - 0.5);
@@ -35,7 +35,7 @@ const NumberChaseGame = () => {
       const nickname = await getNicknameOrPrompt();
       if (nickname) {
         const seconds = parseFloat((time / 1000).toFixed(3));
-        await saveScoreIfHighest("NumberChaseGame", seconds, nickname);
+        await saveScore("NumberChaseGame", seconds, nickname);
       }
     } else {
       setNextNumber(nextNumber + 1);
