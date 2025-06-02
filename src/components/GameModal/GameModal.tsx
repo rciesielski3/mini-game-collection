@@ -10,6 +10,7 @@ import {
   MemoryGame,
   NumberSortGame,
   OddOneOutGame,
+  PatternMemoryGame,
   RacingGame,
   ReactionSequenceGame,
   ReactionTimeGame,
@@ -17,6 +18,7 @@ import {
   TicTacToe,
   WhackAMole,
 } from "../../games";
+import NumberChaseGame from "../../games/NumberChase/NumberChaseGame";
 
 type Props = {
   gameName: string | null;
@@ -46,8 +48,12 @@ const GameModal = ({ gameName, onClose }: Props) => {
         return <MemoryGame />;
       case "NumberSortGame":
         return <NumberSortGame />;
+      case "NumberChaseGame":
+        return <NumberChaseGame />;
       case "OddOneOutGame":
         return <OddOneOutGame />;
+      case "PatternMemoryGame":
+        return <PatternMemoryGame />;
       case "RacingGame":
         return <RacingGame />;
       case "ReactionSequenceGame":

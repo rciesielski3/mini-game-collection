@@ -1,7 +1,7 @@
 import React from "react";
 import "./ColorMatchGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const generateRandomColor = (): string => {
@@ -28,7 +28,7 @@ const ColorMatchGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("SquaresGame", score, nickname);
+      await saveScore("SquaresGame", score, nickname);
     }
   };
 

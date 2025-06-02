@@ -1,7 +1,7 @@
 import React from "react";
 import "./WhackAMole.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const NUM_HOLES = 9;
@@ -40,7 +40,7 @@ const WhackAMole = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("WhackAMoleGame", score, nickname);
+      await saveScore("WhackAMoleGame", score, nickname);
     }
   };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./RacingGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const LANE_COUNT = 8;
@@ -32,7 +32,7 @@ const RacingGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("RacingGame", score, nickname);
+      await saveScore("RacingGame", score, nickname);
     }
   };
 
@@ -96,7 +96,7 @@ const RacingGame = () => {
 
       <div
         ref={gameRef}
-        className="racing-road"
+        className="game-background"
         style={{
           width: `${LANE_COUNT * CAR_WIDTH}px`,
           height: `${GAME_HEIGHT}px`,

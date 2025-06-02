@@ -2,7 +2,7 @@ import React from "react";
 import "./NumberSortGame.css";
 
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 
 const generateNumbers = () => {
   const uniqueSet = new Set<number>();
@@ -56,7 +56,7 @@ const NumberSortGame = () => {
         const nickname = await getNicknameOrPrompt();
         if (nickname) {
           const timeInSeconds = parseFloat((finalTime / 1000).toFixed(3));
-          await saveScoreIfHighest("NumberSortGame", timeInSeconds, nickname);
+          await saveScore("NumberSortGame", timeInSeconds, nickname);
         }
       } else {
         setTargetIndex((i) => i + 1);

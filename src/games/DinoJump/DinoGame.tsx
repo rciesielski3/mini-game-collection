@@ -1,7 +1,7 @@
 import React from "react";
 import "./DinoGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const GAME_HEIGHT = 250;
@@ -98,7 +98,7 @@ const DinoGame = () => {
     const handleGameOver = async () => {
       const nickname = await getNicknameOrPrompt();
       if (nickname && score > 0) {
-        await saveScoreIfHighest("DinoJump", score, nickname);
+        await saveScore("DinoJump", score, nickname);
       }
     };
 

@@ -30,6 +30,12 @@ const GAMES = [
     component: "MemoryGame",
   },
   {
+    emoji: "🪿",
+    title: "Number Chase",
+    description: "Tap numbers 1–25 in order as fast as possible!",
+    component: "NumberChaseGame",
+  },
+  {
     emoji: "🔢",
     title: "Number Sort",
     description:
@@ -41,6 +47,12 @@ const GAMES = [
     title: "Odd One Out",
     description: "Spot the item that doesn't belong as fast as you can!",
     component: "OddOneOutGame",
+  },
+  {
+    emoji: "💠",
+    title: "Pattern Memory",
+    description: "Repeat the growing sequence of colors from memory!",
+    component: "PatternMemoryGame",
   },
   {
     emoji: "🏎️",

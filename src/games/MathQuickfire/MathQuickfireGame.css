@@ -14,7 +14,8 @@
 .math-input {
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  border: 2px solid #888;
+  background-color: #ccc;
+  box-shadow: 5px 5px 5px #7e716d;
   border-radius: 6px;
   width: 100px;
   text-align: center;
