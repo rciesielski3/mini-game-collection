@@ -6,4 +6,4 @@ export const TIME_BASED_GAMES = [
 ];
 
 export const isTimeBasedGame = (game: string): boolean =>
-  TIME_BASED_GAMES.includes(game);
+  TIME_BASED_GAMES.includes(game.trim());

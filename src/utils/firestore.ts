@@ -1,4 +1,3 @@
-import { db } from "../firebase";
 import {
   collection,
   addDoc,
@@ -9,6 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 
+import { db } from "../firebase";
 import { isTimeBasedGame } from "./scoreConfig";
 
 export type ScoreRecord = {
@@ -19,7 +19,7 @@ export type ScoreRecord = {
   timestamp: number;
 };
 
-const getUserId = () => {
+const getOrCreateUserId = (): string => {
   let id = localStorage.getItem("anonUserId");
   if (!id) {
     id = crypto.randomUUID();
@@ -32,34 +32,30 @@ export const saveScoreIfHighest = async (
   game: string,
   score: number,
   nickname: string
-) => {
-  const userId = getUserId();
+): Promise<void> => {
+  const userId = getOrCreateUserId();
+  const isTimeBased = isTimeBasedGame(game);
   const scoresRef = collection(db, "scores");
 
-  const isTimeBased = isTimeBasedGame(game);
+  const docData: any = {
+    game,
+    score,
+    nickname,
+    userId,
+    timestamp: serverTimestamp(),
+  };
 
-  const q = query(
-    scoresRef,
-    where("game", "==", game),
-    where("userId", "==", userId),
-    orderBy("score", isTimeBased ? "asc" : "desc")
-  );
+  if (isTimeBased) {
+    docData.timeInSeconds = score;
+  }
 
-  const snapshot = await getDocs(q);
-  const best = snapshot.docs[0]?.data()?.score;
-
-  const isNewBest =
-    best === undefined || (isTimeBased ? score < best : score > best);
-
-  if (isNewBest) {
-    await addDoc(scoresRef, {
-      game,
-      score,
-      nickname,
-      userId,
-      timestamp: serverTimestamp(),
-      ...(isTimeBased && { timeInSeconds: score }),
-    });
+  try {
+    const docRef = await addDoc(scoresRef, docData);
+    console.log(
+      `[saveScore] Score saved with ID: "${docRef.id}", for game: ${docData.game} with score: ${docData.score}`
+    );
+  } catch (err) {
+    console.error("[saveScore] Failed to save score:", err);
   }
 };
 
@@ -71,31 +67,19 @@ export const fetchScores = async (
     let q = query(collection(db, "scores"), orderBy("timestamp", "desc"));
 
     if (game && userId) {
+      const isTimeBased = isTimeBasedGame(game);
       q = query(
         collection(db, "scores"),
         where("game", "==", game),
         where("userId", "==", userId),
-        orderBy(
-          "score",
-          ["NumberSortGame", "ReactionTimeGame", "NumberChaseGame"].includes(
-            game
-          )
-            ? "asc"
-            : "desc"
-        )
+        orderBy("score", isTimeBased ? "asc" : "desc")
       );
     } else if (game) {
+      const isTimeBased = isTimeBasedGame(game);
       q = query(
         collection(db, "scores"),
         where("game", "==", game),
-        orderBy(
-          "score",
-          ["NumberSortGame", "ReactionTimeGame", "NumberChaseGame"].includes(
-            game
-          )
-            ? "asc"
-            : "desc"
-        )
+        orderBy("score", isTimeBased ? "asc" : "desc")
       );
     } else if (userId) {
       q = query(
@@ -106,6 +90,7 @@ export const fetchScores = async (
     }
 
     const snapshot = await getDocs(q);
+
     return snapshot.docs
       .map((doc) => {
         const data = doc.data();
@@ -119,7 +104,7 @@ export const fetchScores = async (
       })
       .filter((r) => r.nickname !== "Anonymous");
   } catch (error) {
-    console.error("Error fetching scores:", error);
+    console.error("[fetchScores] Error fetching scores:", error);
     return [];
   }
 };
