@@ -84,6 +84,12 @@ const GAMES = [
     description: "Tap numbers 1–25 in order as fast as possible!",
     component: "NumberChaseGame",
   },
+  {
+    emoji: "💠",
+    title: "Pattern Memory",
+    description: "Repeat the growing sequence of colors from memory!",
+    component: "PatternMemoryGame",
+  },
 ];
 
 const App = () => {
