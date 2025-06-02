@@ -1,7 +1,7 @@
 import React from "react";
 import "./MemoryGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 type Card = {
@@ -54,7 +54,7 @@ const MemoryGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("MemoryGame", score, nickname);
+      await saveScore("MemoryGame", score, nickname);
     }
   };
 

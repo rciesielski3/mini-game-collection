@@ -79,6 +79,12 @@ const GAMES = [
     component: "OddOneOutGame",
   },
   {
+    emoji: "🪿",
+    title: "Number Chase",
+    description: "Tap numbers 1–25 in order as fast as possible!",
+    component: "NumberChaseGame",
+  },
+  {
     emoji: "💠",
     title: "Pattern Memory",
     description: "Repeat the growing sequence of colors from memory!",

@@ -1,7 +1,7 @@
 import React from "react";
 import "./ReactionSequenceGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const SEQUENCE_LENGTH = 3;
@@ -44,7 +44,7 @@ const ReactionSequenceGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("ReactionSequenceGame", score, nickname);
+      await saveScore("ReactionSequenceGame", score, nickname);
     }
   };
 

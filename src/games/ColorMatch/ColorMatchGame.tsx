@@ -1,5 +1,5 @@
 import React from "react";
-import "./SquaresGame.css";
+import "./ColorMatchGame.css";
 
 import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
@@ -15,7 +15,7 @@ const generateRandomColor = (): string => {
 
 const GAME_DURATION = 30;
 
-const SquaresGame = () => {
+const ColorMatchGame = () => {
   const [colors, setColors] = React.useState<string[]>([]);
   const [targetColor, setTargetColor] = React.useState<string>("");
   const [score, setScore] = React.useState(0);
@@ -135,4 +135,4 @@ const SquaresGame = () => {
   );
 };
 
-export default SquaresGame;
+export default ColorMatchGame;

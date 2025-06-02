@@ -1,7 +1,7 @@
 import React from "react";
 import "./ReactionTimeGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const ReactionTimeGame = () => {
@@ -26,7 +26,7 @@ const ReactionTimeGame = () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && time > 0) {
       const timeInSeconds = parseFloat((time / 1000).toFixed(3));
-      await saveScoreIfHighest("ReactionTimeGame", timeInSeconds, nickname);
+      await saveScore("ReactionTimeGame", timeInSeconds, nickname);
     }
   };
 

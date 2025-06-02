@@ -1,7 +1,7 @@
 import React from "react";
 import "./MathQuickfireGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const GAME_DURATION = 30;
@@ -36,7 +36,7 @@ const MathQuickfireGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("MathQuickfireGame", score, nickname);
+      await saveScore("MathQuickfireGame", score, nickname);
     }
   };
 

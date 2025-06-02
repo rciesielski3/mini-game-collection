@@ -1,7 +1,7 @@
 import React from "react";
 import "./TicTacToe.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const emptyBoard = Array(9).fill(null);
@@ -33,9 +33,9 @@ const TicTacToe = () => {
       if (!nickname) return;
 
       if (winner) {
-        await saveScoreIfHighest("TicTacToeGame", 1, nickname);
+        await saveScore("TicTacToeGame", 1, nickname);
       } else if (isDraw) {
-        await saveScoreIfHighest("TicTacToeGame", 0.5, nickname);
+        await saveScore("TicTacToeGame", 0.5, nickname);
       }
     };
 

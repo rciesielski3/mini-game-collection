@@ -1,7 +1,7 @@
 import React from "react";
 import "./SnakeGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 type Coord = { x: number; y: number };
@@ -38,7 +38,7 @@ const SnakeGame = () => {
   const handleGameOver = async () => {
     const nickname = await getNicknameOrPrompt();
     if (nickname && score > 0) {
-      await saveScoreIfHighest("SnakeGame", score, nickname);
+      await saveScore("SnakeGame", score, nickname);
     }
   };
 

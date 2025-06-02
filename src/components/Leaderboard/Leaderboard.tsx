@@ -64,9 +64,8 @@ const Leaderboard = () => {
             return (
               <li key={index} className="leaderboard-entry">
                 <span className="rank">{index + 1}. </span>
-                <span className="leaderboard-nickname">
-                  {score.nickname}
-                </span> - <span className="leaderboard-details">{display}</span>
+                <span className="leaderboard-nickname">{score.nickname}</span> ➤
+                <span className="leaderboard-details"> {display}</span>
               </li>
             );
           })}
