@@ -1,7 +1,7 @@
 import React from "react";
 import "./PatternMemoryGame.css";
 
-import { saveScoreIfHighest } from "../../utils/firestore";
+import { saveScore } from "../../utils/firestore";
 import { getNicknameOrPrompt } from "../../helpers/getNicknameOrPrompt";
 
 const colors = ["red", "green", "blue", "yellow"] as const;
@@ -58,7 +58,7 @@ const PatternMemoryGame = () => {
       setGameOver(true);
       const nickname = await getNicknameOrPrompt();
       if (nickname) {
-        await saveScoreIfHighest("PatternMemoryGame", score, nickname);
+        await saveScore("PatternMemoryGame", score, nickname);
       }
     }
   };
