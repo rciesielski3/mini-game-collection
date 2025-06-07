@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import "./GameModal.css";
 
 import {
+  ColorMatchGame,
   DinoGame,
   MathQuickfireGame,
   MemoryGame,
@@ -13,7 +15,6 @@ import {
   ReactionSequenceGame,
   ReactionTimeGame,
   SnakeGame,
-  SquaresGame,
   TicTacToe,
   WhackAMole,
 } from "../../games";
@@ -37,34 +38,34 @@ const GameModal = ({ gameName, onClose }: Props) => {
 
   const renderGame = () => {
     switch (gameName) {
-      case "Snake":
-        return <SnakeGame />;
+      case "ColorMatchGame":
+        return <ColorMatchGame />;
       case "DinoJump":
         return <DinoGame />;
+      case "MathQuickfireGame":
+        return <MathQuickfireGame />;
+      case "MemoryGame":
+        return <MemoryGame />;
+      case "NumberSortGame":
+        return <NumberSortGame />;
+      case "NumberChaseGame":
+        return <NumberChaseGame />;
+      case "OddOneOutGame":
+        return <OddOneOutGame />;
+      case "PatternMemoryGame":
+        return <PatternMemoryGame />;
+      case "RacingGame":
+        return <RacingGame />;
+      case "ReactionSequenceGame":
+        return <ReactionSequenceGame />;
+      case "ReactionTimeGame":
+        return <ReactionTimeGame />;
+      case "Snake":
+        return <SnakeGame />;
       case "TicTacToe":
         return <TicTacToe />;
       case "WhackAMole":
         return <WhackAMole />;
-      case "ReactionTimeGame":
-        return <ReactionTimeGame />;
-      case "RacingGame":
-        return <RacingGame />;
-      case "SquaresGame":
-        return <SquaresGame />;
-      case "MemoryGame":
-        return <MemoryGame />;
-      case "ReactionSequenceGame":
-        return <ReactionSequenceGame />;
-      case "MathQuickfireGame":
-        return <MathQuickfireGame />;
-      case "NumberSortGame":
-        return <NumberSortGame />;
-      case "OddOneOutGame":
-        return <OddOneOutGame />;
-      case "NumberChaseGame":
-        return <NumberChaseGame />;
-      case "PatternMemoryGame":
-        return <PatternMemoryGame />;
       default:
         return null;
     }
@@ -74,7 +75,7 @@ const GameModal = ({ gameName, onClose }: Props) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <button className="modal-close" onClick={onClose}>
-          ❌
+          ✘
         </button>
         {renderGame()}
       </div>
