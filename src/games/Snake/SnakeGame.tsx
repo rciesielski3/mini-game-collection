@@ -122,6 +122,7 @@ const SnakeGame = () => {
     }, 300);
 
     return () => clearInterval(intervalRef.current!);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction, food, started]);
 
   return (

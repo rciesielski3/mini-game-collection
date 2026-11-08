@@ -56,6 +56,7 @@ export const useTriviaQuestions = (amount: number = 1) => {
 
   React.useEffect(() => {
     fetchQuestions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
   return {
