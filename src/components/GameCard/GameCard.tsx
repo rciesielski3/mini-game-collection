@@ -14,10 +14,25 @@ const GameCard: React.FC<GameCardProps> = ({
   description,
   onClick,
 }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div className="game-card" onClick={onClick} role="button" tabIndex={0}>
-      <div className="game-emoji">{emoji}</div>
-      <h3 className="game-title">{title}</h3>
+    <div
+      className="game-card"
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+    >
+      <div className="game-emoji" aria-hidden="true">
+        {emoji}
+      </div>
+      <h3 className="game-card-title">{title}</h3>
       <p className="game-description">{description}</p>
     </div>
   );

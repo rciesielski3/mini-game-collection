@@ -10,7 +10,7 @@ const Footer = () => {
           href="https://rciesielski3.github.io/portfolio/"
           className="underline"
         >
-          Rafal Ciesielski
+          Adateo
         </a>
       </p>
       <p>© {new Date().getFullYear()} All rights reserved.</p>

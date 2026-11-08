@@ -9,6 +9,7 @@
 }
 
 .modal-content {
+  color: #1e2a38;
   background: radial-gradient(circle, #b7c4ca 0%, #5c6471 100%);
   padding: 2rem;
   border-radius: 10px;

@@ -18,10 +18,6 @@ const DashboardNavigator = ({
   >(null);
   const [visitors, setVisitors] = React.useState<number | null>(null);
 
-  const handleBuyCoffee = () => {
-    window.open("https://buycoffee.to/adateo", "_blank");
-  };
-
   React.useEffect(() => {
     updateVisitorCount().then(setVisitors);
   }, []);
@@ -30,41 +26,70 @@ const DashboardNavigator = ({
     setExpandedSection((prev) => (prev === section ? null : section));
   };
 
-  return (
-    <section className="dashboard-section">
-      <div className="dashboard-header-row">
-        <div
-          className="dashboard-toggle"
-          onClick={() => toggleSection("dashboard")}
-        >
-          {expandedSection === "dashboard"
-            ? "📂 Hide dashboard"
-            : "📁 Show dashboard"}
-        </div>
-        <div className="dashboard-toggle" onClick={() => toggleSection("user")}>
-          {expandedSection === "user" ? "🔽 User stats" : "🚀 User stats"}
-        </div>
-        <div className="dashboard-toggle" onClick={handleBuyCoffee}>
-          ☕ Buy Me a Coffee
-        </div>
-        <div className="visitor-button">👥 Visitors: {visitors}</div>
-      </div>
+  const dashboardOpen = expandedSection === "dashboard";
+  const userOpen = expandedSection === "user";
 
-      {expandedSection === "dashboard" && (
-        <div className="dashboard-content">
+  return (
+    <>
+      <header className="topbar">
+        <div className="topbar-inner">
+          <span className="brand">🎮 Mini Game Collection</span>
+
+          <nav className="topnav" aria-label="Dashboard and links">
+            <div className="topnav-group">
+              <button
+                type="button"
+                className="navtab"
+                aria-expanded={dashboardOpen}
+                aria-controls={expandedSection === "dashboard" ? "dashboard-panel" : undefined}
+                onClick={() => toggleSection("dashboard")}
+              >
+                📁 Dashboard <span className="caret" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="navtab"
+                aria-expanded={userOpen}
+                aria-controls={expandedSection === "user" ? "user-stats-panel" : undefined}
+                onClick={() => toggleSection("user")}
+              >
+                🚀 User stats <span className="caret" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="topnav-group">
+              <a
+                className="btn-ghost"
+                href="https://buycoffee.to/adateo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ☕ Buy me a coffee
+              </a>
+              <span className="visitors">
+                <span aria-hidden="true">👥</span>{" "}
+                <strong>{visitors ?? "–"}</strong> visitors
+              </span>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {dashboardOpen && (
+        <div className="dashboard-content" id="dashboard-panel">
           <DailyChallenge onPlay={onSelectGame} />
           <Leaderboard />
         </div>
       )}
 
-      {expandedSection === "user" && (
-        <div className="dashboard-content">
+      {userOpen && (
+        <div className="dashboard-content" id="user-stats-panel">
           <ProgressTracker />
           <UserProfileStats />
           <GameAchievements />
         </div>
       )}
-    </section>
+    </>
   );
 };
 
