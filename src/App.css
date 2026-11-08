@@ -60,6 +60,8 @@
 }
 
 .hero h1 {
+  /* Explicit color: unscoped `h1` in NicknameModal.css sets #434084 globally. */
+  color: var(--ink);
   margin: 0 0 12px;
   font-size: clamp(2.25rem, 5.5vw, 3.75rem);
   font-weight: 700;
@@ -68,7 +70,7 @@
 }
 
 .accent-word {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .subtitle {
@@ -199,13 +201,23 @@
   list-style: none;
 }
 
+.game-grid > * {
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Used by DashboardNavigator and UserProfileStats */
 .dashboard-section {
   display: flex;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  background: radial-gradient(circle, #b7c4ca 0%, #5c6471 100%);
-  border-top: 2px solid #434e74;
-  border-bottom: 2px solid #434e74;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   text-align: center;
   flex-direction: column;
 }

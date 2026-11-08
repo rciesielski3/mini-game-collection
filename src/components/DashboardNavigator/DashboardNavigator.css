@@ -127,29 +127,51 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Expanded panel below the bar: cards on the page background. */
+/* Expanded panel below the bar: one raised surface holding the widgets.
+   The panel is the only frame; the widgets inside are transparent so there
+   is no double border. Selectors use `[class]` (specificity 0,2,0) because the
+   widget components ship their own older gradient rules in their CSS files,
+   which would otherwise win on source order. */
 .dashboard-content {
   box-sizing: border-box;
-  width: 100%;
-  max-width: 1080px;
+  width: calc(100% - 32px);
+  max-width: 1048px;
   margin: 16px auto 0;
-  padding: 0 16px;
+  padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
   align-items: start;
   min-width: 0;
-}
-
-.dashboard-content > * {
-  min-width: 0;
   background: var(--surface, #ffffff);
   border: 1px solid var(--border, #e9e1d6);
-  border-radius: var(--radius-md, 14px);
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(42, 36, 32, 0.04));
-  padding: 20px;
+  border-radius: var(--radius-lg, 24px);
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(42, 36, 32, 0.07));
   color: var(--ink, #2a2420);
+}
+
+.dashboard-content > [class] {
+  box-sizing: border-box;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: var(--ink, #2a2420);
+  text-shadow: none;
   overflow-wrap: anywhere;
+}
+
+/* Hard-coded light text colors from the widget CSS would be unreadable on the
+   light surface, so text elements inherit the panel color. Buttons keep their own
+   colors. */
+.dashboard-content > [class] :is(h1, h2, h3, h4, p, li, span, strong, div) {
+  color: inherit;
+  text-shadow: none;
 }
 
 /* Phone: the bar wraps onto two rows, the visitor counter loses its divider. */
@@ -173,12 +195,12 @@
   .visitors {
     border-left: 0;
     margin-left: 0;
-    padding-left: 10px;
+    padding-left: 14px;
     font-size: 13px;
   }
 
   .dashboard-content {
-    padding: 0 14px;
+    padding: 16px;
   }
 }
 
