@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { DashboardNavigator, Footer, GameCard, GameModal } from "./components";
-import useVisitorTracking from "./hooks/useVisitorTracking";
 
 const GAMES = [
   {
@@ -100,7 +99,6 @@ const getDayOfYear = (date: Date): number => {
 
 const App = () => {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
-  useVisitorTracking();
 
   const featured = GAMES[getDayOfYear(new Date()) % GAMES.length];
 

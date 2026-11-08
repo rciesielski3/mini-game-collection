@@ -13,6 +13,9 @@ const Footer = () => {
           Adateo
         </a>
       </p>
+      <p>
+        <a href="/privacy.html">Privacy policy</a>
+      </p>
       <p>© {new Date().getFullYear()} All rights reserved.</p>
     </footer>
   );
