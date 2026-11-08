@@ -25,7 +25,7 @@ const UserProfileStats: React.FC<Props> = ({ onSelectGame }) => {
   const lastPlayed = scores.sort((a, b) => b.timestamp - a.timestamp)[0]?.game;
 
   return (
-    <div className="profile-stats dashboard-section">
+    <div className="profile-stats">
       <h3 className="profile-title">👤 Your Stats</h3>
       <div className="profile-section">
         <strong>Top Games:</strong>

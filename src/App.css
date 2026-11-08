@@ -195,7 +195,8 @@
 .game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+  align-items: stretch;
+  gap: 18px;
   margin: 0 0 0;
   padding: 0 0 8px;
   list-style: none;
@@ -209,17 +210,6 @@
   .game-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* Used by DashboardNavigator and UserProfileStats */
-.dashboard-section {
-  display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-  flex-direction: column;
 }
 
 @media (max-width: 760px) {

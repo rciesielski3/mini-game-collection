@@ -1,8 +1,13 @@
 .game-card {
+  /* Padding and border must count toward the grid cell size; without this the
+     card overflows its row and collides with the next one. */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  height: 100%;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
   padding: 20px;
   background: var(--surface, #ffffff);
   border: 1px solid var(--border, #e5e0d8);
