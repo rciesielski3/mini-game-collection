@@ -7,6 +7,10 @@
   padding: 20px;
   text-align: center;
   align-content: center;
+  /* Center vertically within the grid row of the expanded dashboard panel
+     (the Leaderboard column is usually taller). Only this widget is centered;
+     the shared .dashboard-content rule keeps align-items: start for the rest. */
+  align-self: center;
   color: var(--ink);
 }
 

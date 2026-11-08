@@ -40,11 +40,21 @@ const Leaderboard = () => {
       <h3 className="leaderboard-title">🏆 Leaderboard</h3>
       {games.length > 1 && (
         <div className="leaderboard-switcher">
-          <button onClick={handlePrev} className="game-button">
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="game-button"
+            aria-label="Previous game"
+          >
             ←
           </button>
           <span className="game-title">{selectedGame.replace("Game", "")}</span>
-          <button onClick={handleNext} className="game-button">
+          <button
+            type="button"
+            onClick={handleNext}
+            className="game-button"
+            aria-label="Next game"
+          >
             →
           </button>
         </div>
