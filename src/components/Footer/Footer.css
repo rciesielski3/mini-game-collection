@@ -1,16 +1,30 @@
 .app-footer {
+  margin-top: 56px;
+  padding: 28px 0 40px;
+  border-top: 1px solid var(--border, #e5e0d8);
+  font-size: 0.875rem;
+  color: var(--ink-faint, #9a9189);
   text-align: center;
-  background: radial-gradient(circle, #b7c4ca 0%, #374458 100%);
-  font-size: 0.8rem;
-  color: #363434;
+}
+
+.app-footer p {
+  margin: 0;
 }
 
 .app-footer a {
-  color: #007acc;
+  color: var(--ink-soft, #6b635b);
   text-decoration: none;
-  font-weight: 500;
+  border-bottom: 1px solid var(--border, #e5e0d8);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.app-footer a:hover {
-  text-decoration: underline;
+.app-footer a:hover,
+.app-footer a:focus-visible {
+  color: var(--accent, #c2410c);
+  border-color: var(--accent, #c2410c);
+}
+
+.app-footer a:focus-visible {
+  outline: 2px solid var(--accent, #c2410c);
+  outline-offset: 3px;
 }

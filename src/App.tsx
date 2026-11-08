@@ -92,32 +92,89 @@ const GAMES = [
   },
 ];
 
+const getDayOfYear = (date: Date): number => {
+  const start = Date.UTC(date.getFullYear(), 0, 0);
+  const today = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  return Math.floor((today - start) / 86400000);
+};
+
 const App = () => {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
   useVisitorTracking();
 
+  const featured = GAMES[getDayOfYear(new Date()) % GAMES.length];
+
+  const playRandomGame = () => {
+    const game = GAMES[Math.floor(Math.random() * GAMES.length)];
+    setSelectedGame(game.component);
+  };
+
   return (
     <div className="app-wrapper">
-      <header className="app-header">
-        <h1 className="app-title">Mini Game Collection</h1>
-        <p className="app-description">
-          Explore fun mini games to relax or challenge your brain 🧠
-        </p>
-      </header>
       <DashboardNavigator onSelectGame={(game) => setSelectedGame(game)} />
-      <main className="game-scroll-area">
-        <div className="game-grid">
-          {GAMES.map((game) => (
-            <GameCard
-              key={game.title}
-              emoji={game.emoji}
-              title={game.title}
-              description={game.description}
-              onClick={() => setSelectedGame(game.component)}
-            />
-          ))}
-        </div>
+
+      <main className="wrap main">
+        <header className="hero">
+          <div className="hero-top">
+            <div className="hero-copy">
+              <p className="eyebrow">Game collection · {GAMES.length} games</p>
+              <h1>
+                Short plays.
+                <br />
+                <span className="accent-word">Zero</span> waiting.
+              </h1>
+              <p className="subtitle">
+                Explore fun mini games to relax or challenge your brain 🧠
+              </p>
+              <div className="hero-cta">
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={playRandomGame}
+                >
+                  ▶ Play a random game
+                </button>
+                <span className="hint">About a minute each</span>
+              </div>
+            </div>
+
+            <aside className="spotlight" aria-label="Featured game">
+              <span className="spot-label">Featured today</span>
+              <div className="spot-emoji" aria-hidden="true">
+                {featured.emoji}
+              </div>
+              <h2>{featured.title}</h2>
+              <p>{featured.description}</p>
+              <button
+                type="button"
+                className="spot-link"
+                onClick={() => setSelectedGame(featured.component)}
+              >
+                Play now →
+              </button>
+            </aside>
+          </div>
+        </header>
+
+        <section aria-labelledby="all-games-heading">
+          <div className="section-head">
+            <h2 id="all-games-heading">All games</h2>
+            <span>{GAMES.length} games</span>
+          </div>
+          <div className="game-grid">
+            {GAMES.map((game) => (
+              <GameCard
+                key={game.title}
+                emoji={game.emoji}
+                title={game.title}
+                description={game.description}
+                onClick={() => setSelectedGame(game.component)}
+              />
+            ))}
+          </div>
+        </section>
       </main>
+
       <Footer />
       <GameModal
         gameName={selectedGame}

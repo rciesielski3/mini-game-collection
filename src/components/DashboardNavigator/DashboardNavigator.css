@@ -1,57 +1,191 @@
-.dashboard-toggle {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #1d5067, #bbbcbe);
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.25rem;
-  cursor: pointer;
-  margin: 1rem;
-  width: fit-content;
-  border: 1px solid #1d5067;
-  box-shadow: 0 5px 10px #333;
-  text-shadow: 1px 2px 4px #333;
+/* Top navigation bar ("Warm Minimal"). Tokens come from src/global.css;
+   fallbacks keep the bar readable if they are not defined yet. */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg, #faf6f0) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border, #e9e1d6);
 }
 
-.dashboard-toggle:hover {
-  color: #ffdd57;
-}
-
-.dashboard-content {
+.topbar-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 16px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   flex-wrap: wrap;
-  border-top: 2px solid #434e74;
-}
-
-.dashboard-toggle:hover {
-  transform: scale(1.05);
-}
-
-.dashboard-header-row {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-width: 0;
 }
 
-.visitor-button {
+.brand {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink, #2a2420);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  border-radius: 6px;
+}
+
+.topnav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-left: auto;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+.topnav-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.navtab,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-soft, #6b625b);
+  background: none;
+  border: 0;
   border-radius: 10px;
-  background: linear-gradient(145deg, #1d5067, #bbbcbe);
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.25rem;
-  margin: 1rem;
-  width: fit-content;
-  border: 1px solid #1d5067;
-  box-shadow: 0 5px 10px #333;
-  text-shadow: 1px 2px 4px #333;
-  cursor: not-allowed;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.navtab:hover,
+.btn-ghost:hover {
+  color: var(--ink, #2a2420);
+  background: var(--surface-muted, #f4eee6);
+}
+
+.navtab:focus-visible,
+.btn-ghost:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid var(--accent, #e8714f);
+  outline-offset: 2px;
+}
+
+.navtab[aria-expanded="true"] {
+  color: var(--accent-text, #b84a2a);
+  background: var(--accent-soft, #fdeee8);
+}
+
+.navtab .caret {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.navtab[aria-expanded="true"] .caret {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.visitors {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--ink-faint, #9a9089);
+  border-left: 1px solid var(--border, #e9e1d6);
+  margin-left: 4px;
+  cursor: default;
+  user-select: none;
+}
+
+.visitors strong {
+  color: var(--ink-soft, #6b625b);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Expanded panel below the bar: cards on the page background. */
+.dashboard-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1080px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: start;
+  min-width: 0;
+}
+
+.dashboard-content > * {
+  min-width: 0;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e9e1d6);
+  border-radius: var(--radius-md, 14px);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(42, 36, 32, 0.04));
+  padding: 20px;
+  color: var(--ink, #2a2420);
+  overflow-wrap: anywhere;
+}
+
+/* Phone: the bar wraps onto two rows, the visitor counter loses its divider. */
+@media (max-width: 560px) {
+  .topbar-inner {
+    padding: 10px 14px;
+  }
+
+  .topnav {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .navtab,
+  .btn-ghost {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .visitors {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 10px;
+    font-size: 13px;
+  }
+
+  .dashboard-content {
+    padding: 0 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navtab,
+  .btn-ghost,
+  .navtab .caret {
+    transition: none !important;
+  }
 }
