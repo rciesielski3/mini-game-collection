@@ -86,6 +86,7 @@ const RacingGame = () => {
       handleGameOver();
       setRunning(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [obstacles, lane, running]);
 
   return (
