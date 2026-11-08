@@ -1,0 +1,24 @@
+name: OpenCode AI Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: nilesh32236/opencode-ai-reviewer@v1.22.1
+        with:
+          mode: review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
