@@ -22,3 +22,6 @@ jobs:
         with:
           mode: review
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Pinned CLI release with a published, verified sha256 (see docs/opencode-checksums.md
+          # in the action repo). Checksum verification stays on (default).
+          opencode_version: 'v1.18.31'
