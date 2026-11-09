@@ -1,0 +1,27 @@
+name: OpenCode AI Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Pinned to the commit behind tag v1.22.1 (tags are mutable).
+      - uses: nilesh32236/opencode-ai-reviewer@fa1fc9333da70a47abd69157e4b38095333cb8e6
+        with:
+          mode: review
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Pinned CLI release with a published, verified sha256 (see docs/opencode-checksums.md
+          # in the action repo). Checksum verification stays on (default).
+          opencode_version: 'v1.18.31'
