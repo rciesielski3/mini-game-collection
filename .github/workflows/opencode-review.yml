@@ -17,8 +17,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: nilesh32236/opencode-ai-reviewer@v1.22.1
+      # Pinned to the commit behind tag v1.22.1 (tags are mutable).
+      - uses: nilesh32236/opencode-ai-reviewer@fa1fc9333da70a47abd69157e4b38095333cb8e6
         with:
           mode: review
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
