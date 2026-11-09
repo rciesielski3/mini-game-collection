@@ -43,7 +43,7 @@ A fun, modular React + TypeScript app featuring a growing collection of mini-gam
 src/
 ├── App.tsx                # Main wrapper
 ├── index.tsx              # App entry point
-├── firebase.ts            # Firebase config & analytics
+├── firebase.ts            # Firebase config & anonymous auth
 ├── global.css             # Base global styles
 ├── utils/
 │   └── firestore.ts       # Firebase Firestore functions
